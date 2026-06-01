@@ -3,114 +3,63 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>JEE Advanced — Syllabus Tracker</title>
+<title id="pageTitle">JEE Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0c0e14;
-  --bg1:#131520;
-  --bg2:#181c2a;
-  --bg3:#1f2336;
-  --border:#2a2f45;
-  --border2:#353c58;
-  --text:#e8eaf2;
-  --text2:#9098b8;
-  --text3:#5c6480;
-  --accent:#f0b429;
-  --accent2:#d4930e;
-  --accent-dim:rgba(240,180,41,0.12);
-  --accent-glow:rgba(240,180,41,0.06);
-  --green:#4ade80;
-  --green-dim:rgba(74,222,128,0.1);
-  --blue:#60a5fa;
-  --blue-dim:rgba(96,165,250,0.1);
-  --pink:#f472b6;
-  --pink-dim:rgba(244,114,182,0.1);
-  --radius:10px;
-  --radius2:14px;
-  --shadow:0 4px 24px rgba(0,0,0,0.4);
+  --bg:#0c0e14;--bg1:#131520;--bg2:#181c2a;--bg3:#1f2336;
+  --border:#2a2f45;--border2:#353c58;
+  --text:#e8eaf2;--text2:#9098b8;--text3:#5c6480;
+  --accent:#f0b429;--accent2:#d4930e;
+  --accent-dim:rgba(240,180,41,0.12);--accent-glow:rgba(240,180,41,0.06);
+  --green:#4ade80;--green-dim:rgba(74,222,128,0.1);
+  --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.1);
+  --pink:#f472b6;--pink-dim:rgba(244,114,182,0.1);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,0.1);
+  --radius:10px;--radius2:14px;--shadow:0 4px 24px rgba(0,0,0,0.4);
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Outfit',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* Noise overlay */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;opacity:.4;
-}
-
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4;}
 .container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 20px 80px}
 
+/* ── MODE SWITCHER ── */
+.mode-switcher-wrap{padding-top:28px;margin-bottom:0}
+.mode-switcher{display:flex;gap:4px;background:var(--bg1);border:1px solid var(--border);border-radius:var(--radius2);padding:5px;}
+.mode-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:var(--radius);border:1px solid transparent;background:transparent;color:var(--text3);cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;}
+.mode-btn:hover{background:var(--bg2);color:var(--text2)}
+.mode-btn-text{text-align:left}
+.mode-btn-name{font-size:14px;font-weight:600;letter-spacing:.02em;line-height:1.2}
+.mode-btn-date{font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;opacity:.7;margin-top:1px}
+.mode-btn.mode-active{background:var(--accent-dim);color:var(--accent);border-color:rgba(240,180,41,.25)}
+.mode-btn.mode-active .mode-btn-date{opacity:1;color:var(--accent)}
+.mode-btn.mode-adv-active{background:var(--purple-dim);color:var(--purple);border-color:rgba(167,139,250,.25)}
+.mode-btn.mode-adv-active .mode-btn-date{opacity:1;color:var(--purple)}
+
 /* ── HEADER ── */
-header{
-  padding:48px 0 32px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:32px;
-}
+header{padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px;}
 .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.logo-area{}
-.logo-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--accent-dim);
-  border:1px solid rgba(240,180,41,0.25);
-  border-radius:100px;
-  padding:4px 14px 4px 4px;
-  font-size:11px;font-weight:600;letter-spacing:.08em;
-  color:var(--accent);text-transform:uppercase;
-  margin-bottom:16px;
-}
-.logo-dot{width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700}
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(28px,5vw,42px);
-  font-weight:600;
-  letter-spacing:-.02em;
-  color:var(--text);
-  line-height:1.15;
-}
-h1 span{color:var(--accent)}
-.subtitle{font-size:14px;color:var(--text3);margin-top:8px;font-weight:300}
-.header-actions{display:flex;gap:10px;align-items:flex-start;padding-top:8px;flex-shrink:0}
-.btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:9px 18px;border-radius:var(--radius);
-  font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
-  cursor:pointer;transition:all .18s;border:1px solid var(--border2);
-  background:var(--bg2);color:var(--text2);letter-spacing:.02em;
-}
-.btn:hover{background:var(--bg3);color:var(--text);border-color:var(--border2)}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid rgba(240,180,41,0.25);border-radius:100px;padding:4px 14px 4px 4px;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;transition:all .25s;}
+.logo-badge.adv-badge{background:var(--purple-dim);border-color:rgba(167,139,250,.25);color:var(--purple)}
+.logo-dot{width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;transition:background .25s}
+.adv-badge .logo-dot{background:var(--purple);color:#fff}
+h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,40px);font-weight:600;letter-spacing:-.02em;color:var(--text);line-height:1.15;}
+h1 span{color:var(--accent);transition:color .25s}
+h1 span.adv-accent{color:var(--purple)}
+.subtitle{font-size:14px;color:var(--text3);margin-top:6px;font-weight:300}
+.header-actions{display:flex;gap:8px;align-items:flex-start;padding-top:6px;flex-shrink:0;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:var(--radius);font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .18s;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);letter-spacing:.02em;}
+.btn:hover{background:var(--bg3);color:var(--text)}
 .btn.active,.btn.edit-on{background:var(--accent-dim);color:var(--accent);border-color:rgba(240,180,41,0.35)}
-.btn.active:hover,.btn.edit-on:hover{background:rgba(240,180,41,0.2)}
 .btn svg{flex-shrink:0}
 
-/* ── OVERALL PROGRESS ── */
-.overall-stats{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
-  margin-bottom:32px;
-}
-.stat-card{
-  background:var(--bg1);
-  border:1px solid var(--border);
-  border-radius:var(--radius2);
-  padding:18px 20px;
-  position:relative;overflow:hidden;
-}
-.stat-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  border-radius:2px 2px 0 0;
-}
+/* ── STATS ── */
+.overall-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--bg1);border:1px solid var(--border);border-radius:var(--radius2);padding:18px 20px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0;}
 .stat-card.phy::before{background:linear-gradient(90deg,var(--blue),transparent)}
 .stat-card.che::before{background:linear-gradient(90deg,var(--green),transparent)}
 .stat-card.mat::before{background:linear-gradient(90deg,var(--pink),transparent)}
@@ -123,15 +72,25 @@ h1 span{color:var(--accent)}
 .che .stat-bar{background:var(--green)}
 .mat .stat-bar{background:var(--pink)}
 
-/* ── SUBJECT TABS ── */
-.tabs{display:flex;gap:4px;margin-bottom:28px;background:var(--bg1);padding:5px;border-radius:var(--radius2);border:1px solid var(--border)}
-.tab{
-  flex:1;padding:10px 16px;border-radius:var(--radius);
-  font-size:13px;font-weight:500;letter-spacing:.03em;
-  cursor:pointer;transition:all .18s;border:none;
-  background:transparent;color:var(--text3);
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
+/* ── OVERALL BAR ── */
+.overall-bar-section{background:var(--bg1);border:1px solid var(--border);border-radius:var(--radius2);padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;gap:18px;}
+.overall-bar-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
+.overall-bar-wrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.overall-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue) 0%,var(--green) 50%,var(--pink) 100%);transition:width .6s cubic-bezier(.4,0,.2,1);}
+.overall-pct{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;color:var(--text);white-space:nowrap}
+
+/* ── COUNTDOWN ── */
+.countdown-section{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
+.cd-card{background:var(--bg1);border:1px solid var(--border);border-radius:var(--radius2);padding:14px 10px;text-align:center;position:relative;overflow:hidden;}
+.cd-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(240,180,41,.05),transparent 70%);pointer-events:none;}
+.cd-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:500;color:var(--accent);letter-spacing:-.03em;line-height:1}
+.cd-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:4px}
+.cd-target{text-align:center;font-size:11px;color:var(--text3);margin-top:-12px;margin-bottom:24px;}
+.cd-target span{color:var(--accent);font-weight:500}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--bg1);padding:5px;border-radius:var(--radius2);border:1px solid var(--border)}
+.tab{flex:1;padding:10px 16px;border-radius:var(--radius);font-size:13px;font-weight:500;letter-spacing:.03em;cursor:pointer;transition:all .18s;border:none;background:transparent;color:var(--text3);display:flex;align-items:center;justify-content:center;gap:8px;}
 .tab .tab-count{font-size:11px;font-family:'JetBrains Mono',monospace;background:var(--bg3);padding:2px 7px;border-radius:100px;transition:all .18s}
 .tab:hover{color:var(--text);background:var(--bg2)}
 .tab.active-phy{background:var(--blue-dim);color:var(--blue)}
@@ -143,239 +102,72 @@ h1 span{color:var(--accent)}
 
 /* ── CHAPTERS ── */
 .chapters{display:flex;flex-direction:column;gap:10px}
-.chapter{
-  background:var(--bg1);
-  border:1px solid var(--border);
-  border-radius:var(--radius2);
-  overflow:hidden;
-  transition:border-color .18s;
-}
+.chapter{background:var(--bg1);border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;transition:border-color .18s;}
 .chapter:hover{border-color:var(--border2)}
 .chapter.open{border-color:var(--border2)}
-.chapter-header{
-  display:flex;align-items:center;gap:12px;
-  padding:16px 20px;cursor:pointer;
-  user-select:none;
-  transition:background .15s;
-}
+.chapter-header{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none;transition:background .15s;}
 .chapter-header:hover{background:rgba(255,255,255,0.02)}
-.ch-arrow{
-  width:20px;height:20px;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--text3);flex-shrink:0;
-  transition:transform .25s cubic-bezier(.4,0,.2,1);
-}
+.ch-arrow{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--text3);flex-shrink:0;transition:transform .25s cubic-bezier(.4,0,.2,1);}
 .chapter.open .ch-arrow{transform:rotate(90deg)}
 .ch-title{font-size:14px;font-weight:500;color:var(--text);flex:1;letter-spacing:.01em}
 .ch-progress-text{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3);flex-shrink:0}
-.ch-mini-bar{
-  width:64px;height:4px;background:var(--bg3);border-radius:2px;
-  overflow:hidden;flex-shrink:0;
-}
+.ch-mini-bar{width:64px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;flex-shrink:0;}
 .ch-mini-fill{height:100%;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1)}
-.phy-color{background:var(--blue)}
-.che-color{background:var(--green)}
-.mat-color{background:var(--pink)}
-.ch-done-badge{
-  font-size:10px;font-weight:600;letter-spacing:.06em;
-  padding:2px 8px;border-radius:100px;background:var(--accent-dim);
-  color:var(--accent);border:1px solid rgba(240,180,41,.2);
-}
-
-.topics-body{
-  border-top:1px solid var(--border);
-  display:none;
-  padding:4px 0 8px;
-}
+.phy-color{background:var(--blue)}.che-color{background:var(--green)}.mat-color{background:var(--pink)}
+.ch-done-badge{font-size:10px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:100px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(240,180,41,.2);}
+.topics-body{border-top:1px solid var(--border);display:none;padding:4px 0 8px;}
 .chapter.open .topics-body{display:block}
 .topics-list{list-style:none}
-.topic-row{
-  display:flex;align-items:center;flex-wrap:wrap;gap:8px;
-  padding:10px 20px;
-  transition:background .12s;
-  cursor:default;
-}
-.topic-row:hover{background:rgba(255,255,255,0.025)}
 
-/* Done indicator (auto-tick icon) */
-.topic-done-icon{
-  width:18px;height:18px;border-radius:50%;
-  background:var(--accent);display:flex;align-items:center;justify-content:center;
-  font-size:9px;color:#000;font-weight:700;flex-shrink:0;
-  opacity:0;transform:scale(0.5);
-  transition:opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1);
-}
+/* ── TOPIC ROW ── */
+.topic-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 20px;transition:background .12s;cursor:default;}
+.topic-row:hover{background:rgba(255,255,255,0.025)}
+.topic-done-icon{width:18px;height:18px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;opacity:0;transform:scale(0.5);transition:opacity .25s,transform .25s cubic-bezier(.34,1.56,.64,1);}
 .topic-row.checked .topic-done-icon{opacity:1;transform:scale(1)}
 .topic-label{font-size:13px;color:var(--text2);flex:1;transition:color .2s;line-height:1.4;min-width:120px}
 .topic-row.checked .topic-label{color:var(--text3);text-decoration:line-through;text-decoration-color:var(--text3)}
-
-/* Pill row */
-.pill-row{
-  display:flex;gap:6px;flex-shrink:0;align-items:center;
-}
-.pill{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:4px 10px;border-radius:100px;font-size:11px;font-weight:500;
-  border:1.5px solid var(--border2);background:var(--bg2);color:var(--text3);
-  cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap;
-}
-.pill:hover{border-color:var(--border2);background:var(--bg3);color:var(--text2)}
+.pill-row{display:flex;gap:6px;flex-shrink:0;align-items:center;}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:500;border:1.5px solid var(--border2);background:var(--bg2);color:var(--text3);cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap;}
+.pill:hover{background:var(--bg3);color:var(--text2)}
 .pill.done{background:var(--accent-dim);border-color:rgba(240,180,41,.4);color:var(--accent)}
 .pill svg{flex-shrink:0}
 
-/* Edit mode */
-.delete-topic-btn{
-  display:none;width:22px;height:22px;border-radius:6px;
-  align-items:center;justify-content:center;
-  border:1px solid rgba(239,68,68,.3);background:transparent;
-  color:#f87171;cursor:pointer;font-size:14px;
-  transition:all .15s;flex-shrink:0;
-}
+/* ── EDIT MODE ── */
+.delete-topic-btn{display:none;width:22px;height:22px;border-radius:6px;align-items:center;justify-content:center;border:1px solid rgba(239,68,68,.3);background:transparent;color:#f87171;cursor:pointer;font-size:14px;transition:all .15s;flex-shrink:0;}
 .delete-topic-btn:hover{background:rgba(239,68,68,.15)}
 .edit-mode .delete-topic-btn{display:flex}
 .edit-mode .pill{pointer-events:none;opacity:.5}
-.edit-mode .topic-row{cursor:default}
 .edit-mode .topic-row:hover{background:transparent}
-
-/* ── OVERALL BAR ── */
-.overall-bar-section{
-  background:var(--bg1);border:1px solid var(--border);
-  border-radius:var(--radius2);padding:18px 22px;
-  margin-bottom:20px;
-  display:flex;align-items:center;gap:18px;
-}
-.overall-bar-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
-.overall-bar-wrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;position:relative}
-.overall-bar-fill{
-  height:100%;border-radius:3px;
-  background:linear-gradient(90deg,var(--blue) 0%,var(--green) 50%,var(--pink) 100%);
-  transition:width .6s cubic-bezier(.4,0,.2,1);
-}
-.overall-pct{
-  font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;
-  color:var(--text);white-space:nowrap;
-}
-
-/* ── COUNTDOWN ── */
-.countdown-section{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
-  margin-bottom:32px;
-}
-.cd-card{
-  background:var(--bg1);border:1px solid var(--border);
-  border-radius:var(--radius2);padding:14px 10px;text-align:center;
-  position:relative;overflow:hidden;
-}
-.cd-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 0%,rgba(240,180,41,.05),transparent 70%);
-  pointer-events:none;
-}
-.cd-num{
-  font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:500;
-  color:var(--accent);letter-spacing:-.03em;line-height:1;
-}
-.cd-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:4px}
-.cd-target{
-  text-align:center;font-size:11px;color:var(--text3);
-  margin-top:-20px;margin-bottom:24px;
-}
-.cd-target span{color:var(--accent);font-weight:500}
-
-.add-topic-row{
-  padding:6px 20px;
-  display:none;
-}
+.add-topic-row{padding:6px 20px;display:none;}
 .edit-mode .add-topic-row{display:flex;align-items:center;gap:8px}
-.add-topic-input{
-  flex:1;background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;
-  padding:7px 12px;border-radius:8px;outline:none;
-  transition:border-color .15s;
-}
+.add-topic-input{flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;padding:7px 12px;border-radius:8px;outline:none;transition:border-color .15s;}
 .add-topic-input::placeholder{color:var(--text3)}
 .add-topic-input:focus{border-color:var(--accent)}
-.add-topic-btn{
-  padding:7px 14px;background:var(--accent-dim);border:1px solid rgba(240,180,41,.3);
-  color:var(--accent);font-size:12px;font-weight:500;
-  border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;
-  transition:all .15s;white-space:nowrap;
-}
+.add-topic-btn{padding:7px 14px;background:var(--accent-dim);border:1px solid rgba(240,180,41,.3);color:var(--accent);font-size:12px;font-weight:500;border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;white-space:nowrap;}
 .add-topic-btn:hover{background:rgba(240,180,41,.2)}
-
-.add-chapter-area{
-  margin-top:16px;display:none;
-  background:var(--bg1);border:1px dashed var(--border2);
-  border-radius:var(--radius2);padding:16px 20px;
-}
-.edit-mode .add-chapter-area{display:block}
+.add-chapter-area{margin-top:16px;display:none;background:var(--bg1);border:1px dashed var(--border2);border-radius:var(--radius2);padding:16px 20px;}
 .add-chapter-title{font-size:12px;font-weight:500;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
 .add-ch-fields{display:flex;gap:8px;align-items:center}
-.add-ch-input{
-  flex:1;background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;
-  padding:8px 12px;border-radius:8px;outline:none;transition:border-color .15s;
-}
+.add-ch-input{flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;padding:8px 12px;border-radius:8px;outline:none;transition:border-color .15s;}
 .add-ch-input::placeholder{color:var(--text3)}
 .add-ch-input:focus{border-color:var(--accent)}
-.add-ch-btn{
-  padding:8px 16px;background:var(--accent-dim);border:1px solid rgba(240,180,41,.3);
-  color:var(--accent);font-size:13px;font-weight:500;
-  border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;
-  transition:all .15s;
-}
+.add-ch-btn{padding:8px 16px;background:var(--accent-dim);border:1px solid rgba(240,180,41,.3);color:var(--accent);font-size:13px;font-weight:500;border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
 .add-ch-btn:hover{background:rgba(240,180,41,.2)}
-
-.delete-chapter-btn{
-  display:none;padding:4px 10px;border-radius:7px;
-  border:1px solid rgba(239,68,68,.3);background:transparent;
-  color:#f87171;font-size:11px;font-weight:500;
-  cursor:pointer;font-family:'Outfit',sans-serif;
-  transition:all .15s;flex-shrink:0;margin-left:4px;
-}
+.delete-chapter-btn{display:none;padding:4px 10px;border-radius:7px;border:1px solid rgba(239,68,68,.3);background:transparent;color:#f87171;font-size:11px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;flex-shrink:0;margin-left:4px;}
 .delete-chapter-btn:hover{background:rgba(239,68,68,.15)}
 .edit-mode .delete-chapter-btn{display:flex;align-items:center;gap:4px}
 
-/* Search */
+/* ── SEARCH ── */
 .search-wrap{margin-bottom:20px;position:relative}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
-.search-input{
-  width:100%;background:var(--bg1);border:1px solid var(--border);
-  color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;
-  padding:11px 14px 11px 40px;border-radius:var(--radius);outline:none;
-  transition:border-color .15s;
-}
+.search-input{width:100%;background:var(--bg1);border:1px solid var(--border);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;padding:11px 14px 11px 40px;border-radius:var(--radius);outline:none;transition:border-color .15s;}
 .search-input::placeholder{color:var(--text3)}
 .search-input:focus{border-color:var(--border2)}
-
-/* Footer */
-footer{
-  text-align:center;padding-top:32px;
-  font-size:11px;color:var(--text3);letter-spacing:.04em;
-  border-top:1px solid var(--border);margin-top:40px;
-}
-
-/* Topic highlight in search */
 .topic-row.hidden{display:none}
 .chapter.all-hidden{display:none}
 
-/* Responsive */
-@media(max-width:600px){
-  .overall-stats{grid-template-columns:1fr}
-  .stat-val{font-size:22px}
-  .tabs{flex-direction:column}
-  .countdown-section{grid-template-columns:repeat(2,1fr)}
-  .cd-num{font-size:20px}
-  .overall-bar-section{flex-direction:column;align-items:flex-start;gap:10px}
-  .overall-pct{font-size:14px}
-}
-/* ── SYNC STATUS ── */
-.sync-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 12px;border-radius:100px;font-size:11px;font-weight:500;
-  border:1px solid var(--border2);background:var(--bg2);color:var(--text3);
-  transition:all .2s;
-}
+/* ── SYNC BADGE ── */
+.sync-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-size:11px;font-weight:500;border:1px solid var(--border2);background:var(--bg2);color:var(--text3);transition:all .2s;cursor:pointer;}
 .sync-badge.connected{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.08);color:var(--green)}
 .sync-badge.saving{border-color:rgba(240,180,41,.35);background:rgba(240,180,41,.08);color:var(--accent)}
 .sync-badge.error{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08);color:#f87171}
@@ -384,78 +176,82 @@ footer{
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ── MODAL ── */
-.modal-overlay{
-  display:none;position:fixed;inset:0;z-index:100;
-  background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
-  align-items:center;justify-content:center;padding:20px;
-}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{display:flex}
-.modal{
-  background:var(--bg1);border:1px solid var(--border2);
-  border-radius:18px;padding:32px;max-width:480px;width:100%;
-  position:relative;box-shadow:0 24px 60px rgba(0,0,0,.6);
-}
+.modal{background:var(--bg1);border:1px solid var(--border2);border-radius:18px;padding:32px;max-width:480px;width:100%;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.6);}
 .modal-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:6px}
 .modal-sub{font-size:13px;color:var(--text3);margin-bottom:24px;line-height:1.6}
 .modal-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;display:block}
-.modal-input{
-  width:100%;background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;
-  padding:10px 14px;border-radius:10px;outline:none;margin-bottom:14px;
-  transition:border-color .15s;
-}
+.modal-input{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;padding:10px 14px;border-radius:10px;outline:none;margin-bottom:14px;transition:border-color .15s;}
 .modal-input:focus{border-color:var(--accent)}
 .modal-input::placeholder{color:var(--text3)}
 .modal-actions{display:flex;gap:10px;margin-top:8px}
-.modal-btn-primary{
-  flex:1;padding:11px;border-radius:10px;
-  background:var(--accent);border:none;color:#000;
-  font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;
-  cursor:pointer;transition:all .15s;
-}
+.modal-btn-primary{flex:1;padding:11px;border-radius:10px;background:var(--accent);border:none;color:#000;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
 .modal-btn-primary:hover{background:var(--accent2)}
 .modal-btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.modal-btn-skip{
-  padding:11px 18px;border-radius:10px;
-  background:transparent;border:1px solid var(--border2);color:var(--text3);
-  font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;
-}
+.modal-btn-skip{padding:11px 18px;border-radius:10px;background:transparent;border:1px solid var(--border2);color:var(--text3);font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;}
 .modal-btn-skip:hover{background:var(--bg2);color:var(--text)}
-.modal-close{
-  position:absolute;top:16px;right:16px;
-  width:28px;height:28px;border-radius:8px;
-  background:var(--bg3);border:1px solid var(--border);
-  color:var(--text3);cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
+.modal-close{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text3);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
 .modal-close:hover{background:var(--bg2);color:var(--text)}
 .modal-error{font-size:12px;color:#f87171;margin-top:-8px;margin-bottom:10px;display:none}
 .modal-error.visible{display:block}
-.modal-hint{
-  font-size:11px;color:var(--text3);margin-top:16px;padding:12px 14px;
-  background:var(--bg2);border-radius:8px;line-height:1.7;
-}
+.modal-hint{font-size:11px;color:var(--text3);margin-top:16px;padding:12px 14px;background:var(--bg2);border-radius:8px;line-height:1.7;}
 .modal-hint code{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--accent);background:var(--bg3);padding:1px 5px;border-radius:4px}
 
+/* ── FOOTER ── */
+footer{text-align:center;padding-top:32px;font-size:11px;color:var(--text3);letter-spacing:.04em;border-top:1px solid var(--border);margin-top:40px;}
 .footer-sync-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .overall-stats{grid-template-columns:1fr}
+  .stat-val{font-size:22px}
+  .tabs{flex-direction:column}
+  .countdown-section{grid-template-columns:repeat(2,1fr)}
+  .cd-num{font-size:20px}
+  .overall-bar-section{flex-direction:column;align-items:flex-start;gap:10px}
+  .header-actions{gap:6px}
+  .mode-btn{padding:10px 12px;gap:8px}
+  .mode-btn-name{font-size:13px}
+}
 </style>
 </head>
 <body>
 <div class="container">
 
+<!-- MODE SWITCHER -->
+<div class="mode-switcher-wrap">
+  <div class="mode-switcher">
+    <button id="modeMain" class="mode-btn mode-active" onclick="switchMode('main')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M10 20v-6h4v6"/></svg>
+      <div class="mode-btn-text">
+        <div class="mode-btn-name">JEE Main</div>
+        <div class="mode-btn-date">21 Jan 2027</div>
+      </div>
+    </button>
+    <button id="modeAdv" class="mode-btn" onclick="switchMode('adv')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <div class="mode-btn-text">
+        <div class="mode-btn-name">JEE Advanced</div>
+        <div class="mode-btn-date">15 May 2027</div>
+      </div>
+    </button>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
   <div class="header-top">
     <div class="logo-area">
-      <div class="logo-badge">
+      <div class="logo-badge" id="logoBadge">
         <div class="logo-dot">✦</div>
-        JEE Advanced
+        <span id="badgeText">JEE Main</span>
       </div>
-      <h1>Syllabus <span>Tracker</span></h1>
+      <h1>Syllabus <span id="accentWord">Tracker</span></h1>
       <p class="subtitle">Track your preparation across Physics · Chemistry · Mathematics</p>
     </div>
     <div class="header-actions">
-      <div class="sync-badge" id="syncBadge" onclick="openSupabaseModal()" style="cursor:pointer" title="Click to configure Supabase sync">
+      <div class="sync-badge" id="syncBadge" onclick="openSupabaseModal()" title="Click to configure sync">
         <div class="sync-dot"></div>
         <span id="syncLabel">Local only</span>
       </div>
@@ -465,11 +261,11 @@ footer{
       </button>
       <button class="btn" onclick="resetConfirm()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
-        Reset Ticks
+        Reset
       </button>
       <button class="btn" onclick="revertSyllabus()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/></svg>
-        Official Syllabus
+        Official
       </button>
     </div>
   </div>
@@ -477,21 +273,9 @@ footer{
 
 <!-- STATS -->
 <div class="overall-stats">
-  <div class="stat-card phy">
-    <div class="stat-label">Physics</div>
-    <div class="stat-val"><span id="phyDone">0</span><small> / <span id="phyTotal">0</span></small></div>
-    <div class="stat-bar-wrap"><div class="stat-bar" id="phyBar" style="width:0%"></div></div>
-  </div>
-  <div class="stat-card che">
-    <div class="stat-label">Chemistry</div>
-    <div class="stat-val"><span id="cheDone">0</span><small> / <span id="cheTotal">0</span></small></div>
-    <div class="stat-bar-wrap"><div class="stat-bar" id="cheBar" style="width:0%"></div></div>
-  </div>
-  <div class="stat-card mat">
-    <div class="stat-label">Mathematics</div>
-    <div class="stat-val"><span id="matDone">0</span><small> / <span id="matTotal">0</span></small></div>
-    <div class="stat-bar-wrap"><div class="stat-bar" id="matBar" style="width:0%"></div></div>
-  </div>
+  <div class="stat-card phy"><div class="stat-label">Physics</div><div class="stat-val"><span id="phyDone">0</span><small> / <span id="phyTotal">0</span></small></div><div class="stat-bar-wrap"><div class="stat-bar" id="phyBar" style="width:0%"></div></div></div>
+  <div class="stat-card che"><div class="stat-label">Chemistry</div><div class="stat-val"><span id="cheDone">0</span><small> / <span id="cheTotal">0</span></small></div><div class="stat-bar-wrap"><div class="stat-bar" id="cheBar" style="width:0%"></div></div></div>
+  <div class="stat-card mat"><div class="stat-label">Mathematics</div><div class="stat-val"><span id="matDone">0</span><small> / <span id="matTotal">0</span></small></div><div class="stat-bar-wrap"><div class="stat-bar" id="matBar" style="width:0%"></div></div></div>
 </div>
 
 <!-- OVERALL BAR -->
@@ -508,24 +292,21 @@ footer{
   <div class="cd-card"><div class="cd-num" id="cdMins">—</div><div class="cd-label">Minutes</div></div>
   <div class="cd-card"><div class="cd-num" id="cdSecs">—</div><div class="cd-label">Seconds</div></div>
 </div>
-<p class="cd-target">Countdown to <span>JEE Advanced — 15 May 2027</span></p>
+<p class="cd-target">Countdown to <span id="cdTargetLabel">JEE Main — 21 January 2027</span></p>
 
-<!-- TABS -->
+<!-- SUBJECT TABS -->
 <div class="tabs">
   <button class="tab" id="tab-Physics" onclick="switchTab('Physics')">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-    Physics
-    <span class="tab-count" id="tabCount-Physics">0%</span>
+    Physics <span class="tab-count" id="tabCount-Physics">0%</span>
   </button>
   <button class="tab" id="tab-Chemistry" onclick="switchTab('Chemistry')">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-    Chemistry
-    <span class="tab-count" id="tabCount-Chemistry">0%</span>
+    Chemistry <span class="tab-count" id="tabCount-Chemistry">0%</span>
   </button>
   <button class="tab" id="tab-Mathematics" onclick="switchTab('Mathematics')">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
-    Mathematics
-    <span class="tab-count" id="tabCount-Mathematics">0%</span>
+    Mathematics <span class="tab-count" id="tabCount-Mathematics">0%</span>
   </button>
 </div>
 
@@ -535,14 +316,13 @@ footer{
   <input class="search-input" type="text" id="searchInput" placeholder="Search topics..." oninput="filterTopics(this.value)"/>
 </div>
 
-<!-- CHAPTERS CONTAINER -->
+<!-- CHAPTERS -->
 <div class="chapters" id="chaptersContainer"></div>
 
-<!-- ADD CHAPTER AREA (shown in edit mode) -->
 <div class="add-chapter-area" id="addChapterArea">
   <div class="add-chapter-title">Add New Chapter</div>
   <div class="add-ch-fields">
-    <input class="add-ch-input" type="text" id="newChapterName" placeholder="Chapter name…"/>
+    <input class="add-ch-input" type="text" id="newChapterName" placeholder="Chapter name…" onkeydown="if(event.key==='Enter')addChapter()"/>
     <button class="add-ch-btn" onclick="addChapter()">+ Add Chapter</button>
   </div>
 </div>
@@ -552,7 +332,7 @@ footer{
     <span id="footerSyncStatus">Progress saved locally in your browser</span>
     <button class="btn" style="padding:5px 12px;font-size:11px" onclick="openSupabaseModal()">⚙ Sync Settings</button>
   </div>
-  Built for JEE Advanced preparation · 2027
+  Built for JEE Main &amp; Advanced preparation · 2027
 </footer>
 </div>
 
@@ -561,12 +341,12 @@ footer{
   <div class="modal">
     <button class="modal-close" onclick="closeSupabaseModal()">✕</button>
     <div class="modal-title">☁ Cloud Sync</div>
-    <div class="modal-sub">Connect your Supabase project to sync progress across devices. Your data is stored in your own database.</div>
+    <div class="modal-sub">Your Supabase project is pre-configured. Enter a User ID to sync your progress across devices. Both <strong>Main</strong> and <strong>Advanced</strong> data sync separately.</div>
     <label class="modal-label">Supabase Project URL</label>
     <input class="modal-input" id="sbUrl" placeholder="https://xxxx.supabase.co" />
     <label class="modal-label">Anon / Public API Key</label>
-    <input class="modal-input" id="sbKey" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." type="password" />
-    <label class="modal-label">User ID <span style="font-weight:400;text-transform:none;letter-spacing:0">(any string to identify your data)</span></label>
+    <input class="modal-input" id="sbKey" placeholder="eyJ..." type="password" />
+    <label class="modal-label">User ID <span style="font-weight:400;text-transform:none;letter-spacing:0">(a unique string to identify your data)</span></label>
     <input class="modal-input" id="sbUser" placeholder="e.g. my-jee-prep" />
     <div class="modal-error" id="sbError"></div>
     <div class="modal-actions">
@@ -574,732 +354,203 @@ footer{
       <button class="modal-btn-skip" onclick="disconnectSupabase()">Disconnect</button>
     </div>
     <div class="modal-hint">
-      <strong style="color:var(--text2)">Setup (one-time):</strong><br>
-      1. Create a free project at <code>supabase.com</code><br>
-      2. Go to SQL Editor and run:<br>
+      <strong style="color:var(--text2)">One-time DB setup:</strong><br>
+      SQL Editor → run:<br>
       <code>create table jee_tracker (user_id text primary key, syllabus jsonb, checked jsonb, updated_at timestamptz default now());</code><br>
-      3. Paste your Project URL &amp; anon key above.
+      Data is stored as <code>{userId}_main</code> and <code>{userId}_adv</code> rows.
     </div>
   </div>
 </div>
 
 <script>
-// ── SUPABASE CONFIG ──
-let sbConfig = null; // {url, key, userId}
+// ─────────────────────────────────────────────
+// SUPABASE — pre-filled credentials
+// ─────────────────────────────────────────────
+const PRESET_SB_URL = 'https://kyvyahvlgpjukvmaugtc.supabase.co';
+const PRESET_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5dnlhaHZsZ3BqdWt2bWF1Z3RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyOTUxOTksImV4cCI6MjA5NTg3MTE5OX0.iDpYd5_atZXop-BfRmLptrgXYgDP2MGH5VSliqbVvJg';
+
+let sbConfig = null;
 let saveDebounceTimer = null;
 let isSyncing = false;
 
 function loadSbConfig(){
-  try{
-    const c = localStorage.getItem('jee_sb_config');
-    if(c) sbConfig = JSON.parse(c);
-  }catch(e){}
+  try{ const c=localStorage.getItem('jee_sb_config'); if(c) sbConfig=JSON.parse(c); }catch(e){}
 }
 function saveSbConfig(){
-  if(sbConfig) localStorage.setItem('jee_sb_config', JSON.stringify(sbConfig));
+  if(sbConfig) localStorage.setItem('jee_sb_config',JSON.stringify(sbConfig));
   else localStorage.removeItem('jee_sb_config');
 }
-
-function setSyncStatus(state, label){
-  const badge = document.getElementById('syncBadge');
-  const lbl = document.getElementById('syncLabel');
-  const footer = document.getElementById('footerSyncStatus');
-  badge.className = 'sync-badge ' + (state||'');
-  lbl.textContent = label;
-  if(state==='connected') footer.textContent = 'Synced to Supabase ✓';
-  else if(state==='saving') footer.textContent = 'Syncing…';
-  else if(state==='error') footer.textContent = 'Sync error — saved locally';
-  else footer.textContent = 'Progress saved locally in your browser';
+function setSyncStatus(state,label){
+  const badge=document.getElementById('syncBadge');
+  const lbl=document.getElementById('syncLabel');
+  const footer=document.getElementById('footerSyncStatus');
+  badge.className='sync-badge '+(state||'');
+  lbl.textContent=label;
+  if(state==='connected') footer.textContent='Synced to Supabase ✓';
+  else if(state==='saving') footer.textContent='Syncing…';
+  else if(state==='error') footer.textContent='Sync error — saved locally';
+  else footer.textContent='Progress saved locally in your browser';
 }
-
-// ── SUPABASE API ──
-async function sbFetch(path, method, body){
-  const r = await fetch(sbConfig.url + '/rest/v1/' + path, {
-    method, headers:{
-      'apikey': sbConfig.key,
-      'Authorization': 'Bearer ' + sbConfig.key,
-      'Content-Type': 'application/json',
-      'Prefer': method==='POST'?'resolution=merge-duplicates,return=minimal':'return=minimal'
+async function sbFetch(path,method,body){
+  const r=await fetch(sbConfig.url+'/rest/v1/'+path,{
+    method,headers:{
+      'apikey':sbConfig.key,'Authorization':'Bearer '+sbConfig.key,
+      'Content-Type':'application/json',
+      'Prefer':method==='POST'?'resolution=merge-duplicates,return=minimal':'return=minimal'
     },
-    body: body ? JSON.stringify(body) : undefined
+    body:body?JSON.stringify(body):undefined
   });
-  if(!r.ok){ const t=await r.text(); throw new Error(t); }
-  return method==='GET' ? r.json() : null;
+  if(!r.ok){const t=await r.text();throw new Error(t);}
+  return method==='GET'?r.json():null;
 }
-
+function sbRowId(){ return sbConfig ? `${sbConfig.userId}_${activeMode}` : null; }
 async function sbPush(){
-  if(!sbConfig || isSyncing) return;
-  isSyncing = true;
-  setSyncStatus('saving','Syncing…');
+  if(!sbConfig||isSyncing)return;
+  isSyncing=true; setSyncStatus('saving','Syncing…');
   try{
-    await sbFetch('jee_tracker', 'POST', {
-      user_id: sbConfig.userId,
-      syllabus: syllabus,
-      checked: checked,
-      updated_at: new Date().toISOString()
-    });
+    await sbFetch('jee_tracker','POST',{user_id:sbRowId(),syllabus,checked,updated_at:new Date().toISOString()});
     setSyncStatus('connected','Synced');
-  }catch(e){
-    console.error('Supabase push error', e);
-    setSyncStatus('error','Sync error');
-  }
-  isSyncing = false;
+  }catch(e){ console.error(e); setSyncStatus('error','Sync error'); }
+  isSyncing=false;
 }
-
 async function sbPull(){
-  if(!sbConfig) return false;
+  if(!sbConfig)return false;
   try{
-    const rows = await sbFetch(
-      `jee_tracker?user_id=eq.${encodeURIComponent(sbConfig.userId)}&select=syllabus,checked`,
-      'GET'
-    );
-    if(rows && rows.length > 0){
-      const row = rows[0];
-      if(row.syllabus) syllabus = row.syllabus;
-      if(row.checked) checked = row.checked;
-      // Also save to localStorage as cache
-      localStorage.setItem('jee_syllabus', JSON.stringify(syllabus));
-      localStorage.setItem('jee_checked', JSON.stringify(checked));
+    const rows=await sbFetch(`jee_tracker?user_id=eq.${encodeURIComponent(sbRowId())}&select=syllabus,checked`,'GET');
+    if(rows&&rows.length>0){
+      const row=rows[0];
+      if(row.syllabus) syllabus=row.syllabus;
+      if(row.checked) checked=row.checked;
+      const keys=storageKeys();
+      localStorage.setItem(keys.syllabus,JSON.stringify(syllabus));
+      localStorage.setItem(keys.checked,JSON.stringify(checked));
       return true;
     }
     return false;
-  }catch(e){
-    console.error('Supabase pull error', e);
-    setSyncStatus('error','Sync error');
-    return false;
-  }
+  }catch(e){ console.error(e); setSyncStatus('error','Sync error'); return false; }
 }
-
-// ── MODAL ──
 function openSupabaseModal(){
-  if(sbConfig){
-    document.getElementById('sbUrl').value = sbConfig.url||'';
-    document.getElementById('sbKey').value = sbConfig.key||'';
-    document.getElementById('sbUser').value = sbConfig.userId||'';
-  }
+  document.getElementById('sbUrl').value = sbConfig?.url || PRESET_SB_URL;
+  document.getElementById('sbKey').value = sbConfig?.key || PRESET_SB_KEY;
+  document.getElementById('sbUser').value = sbConfig?.userId || '';
   document.getElementById('supabaseModal').classList.add('open');
 }
 function closeSupabaseModal(){ document.getElementById('supabaseModal').classList.remove('open'); }
-
 async function connectSupabase(){
-  const url = document.getElementById('sbUrl').value.trim().replace(/\/$/,'');
-  const key = document.getElementById('sbKey').value.trim();
-  const userId = document.getElementById('sbUser').value.trim();
-  const errEl = document.getElementById('sbError');
-  const btn = document.getElementById('sbConnectBtn');
+  const url=document.getElementById('sbUrl').value.trim().replace(/\/$/,'');
+  const key=document.getElementById('sbKey').value.trim();
+  const userId=document.getElementById('sbUser').value.trim();
+  const errEl=document.getElementById('sbError');
+  const btn=document.getElementById('sbConnectBtn');
   errEl.className='modal-error';
-  if(!url||!key||!userId){ errEl.textContent='All fields required.'; errEl.className='modal-error visible'; return; }
+  if(!url||!key||!userId){errEl.textContent='All fields required.';errEl.className='modal-error visible';return;}
   btn.disabled=true; btn.textContent='Connecting…';
-  sbConfig = {url, key, userId};
+  sbConfig={url,key,userId};
   try{
-    // Test: try a pull first
-    const pulled = await sbPull();
-    saveSbConfig();
-    setSyncStatus('connected','Synced');
-    if(pulled){ renderChapters(); updateStats(); }
-    else { await sbPush(); } // first time — push local data up
+    const pulled=await sbPull();
+    saveSbConfig(); setSyncStatus('connected','Synced');
+    if(pulled){renderChapters();updateStats();}else{await sbPush();}
     closeSupabaseModal();
-  }catch(e){
-    sbConfig=null;
-    errEl.textContent = 'Connection failed. Check URL and key.';
-    errEl.className='modal-error visible';
-  }
+  }catch(e){ sbConfig=null; errEl.textContent='Connection failed. Check URL and key.'; errEl.className='modal-error visible'; }
   btn.disabled=false; btn.textContent='Connect & Sync';
 }
+function disconnectSupabase(){ sbConfig=null; saveSbConfig(); setSyncStatus('','Local only'); closeSupabaseModal(); }
+document.getElementById('supabaseModal').addEventListener('click',function(e){if(e.target===this)closeSupabaseModal();});
 
-function disconnectSupabase(){
-  sbConfig=null; saveSbConfig();
-  setSyncStatus('','Local only');
-  closeSupabaseModal();
+// ─────────────────────────────────────────────
+// MODE
+// ─────────────────────────────────────────────
+let activeMode = 'main'; // 'main' | 'adv'
+
+function storageKeys(){
+  return activeMode==='main'
+    ? {syllabus:'jee_main_syllabus',checked:'jee_main_checked'}
+    : {syllabus:'jee_adv_syllabus',checked:'jee_adv_checked'};
+}
+function defaultSyllabus(){
+  return activeMode==='main' ? DEFAULT_MAIN : DEFAULT_ADV;
 }
 
-// Close modal on overlay click
-document.getElementById('supabaseModal').addEventListener('click', function(e){
-  if(e.target===this) closeSupabaseModal();
-});
-const DEFAULT_SYLLABUS = {
-  Physics: [
-    {id:"ph-gen",chapter:"General",topics:[
-      "Units and dimensions","Dimensional analysis",
-      "Least count and significant figures","Error analysis — absolute, relative, percentage",
-      "Propagation of errors in calculations",
-      "Experiment: Vernier callipers and screw gauge (micrometre)",
-      "Experiment: Determination of g using simple pendulum",
-      "Experiment: Young's modulus — elasticity of material",
-      "Experiment: Surface tension of water by capillary rise and effect of detergents",
-      "Experiment: Specific heat of a liquid using calorimeter",
-      "Experiment: Focal length of concave mirror and convex lens (u-v method)",
-      "Experiment: Speed of sound using resonance column",
-      "Experiment: Verification of Ohm's law using voltmeter and ammeter",
-      "Experiment: Specific resistance using metre bridge and post office box"
-    ]},
-    {id:"ph-mech",chapter:"Mechanics",topics:[
-      "Kinematics in 1D and 2D (Cartesian only)","Projectile motion",
-      "Uniform circular motion","Relative velocity",
-      "Newton's laws of motion","Inertial and uniformly accelerated frames of reference",
-      "Static and dynamic friction","Kinetic and potential energy",
-      "Work and power","Conservation of linear momentum and mechanical energy",
-      "Systems of particles","Centre of mass and its motion","Impulse",
-      "Elastic and inelastic collisions",
-      "Rigid body — moment of inertia","Parallel and perpendicular axes theorems",
-      "Moment of inertia of uniform bodies with simple geometrical shapes",
-      "Angular momentum","Torque","Conservation of angular momentum",
-      "Dynamics of rigid bodies with fixed axis of rotation",
-      "Rolling without slipping — rings, cylinders and spheres",
-      "Equilibrium of rigid bodies","Collision of point masses with rigid bodies",
-      "Forced and damped oscillation (1D)","Resonance",
-      "Linear and angular simple harmonic motions",
-      "Hooke's law and Young's modulus",
-      "Law of gravitation","Gravitational potential and field",
-      "Acceleration due to gravity","Kepler's laws",
-      "Geostationary orbits","Motion of planets and satellites in circular orbits",
-      "Escape velocity",
-      "Pressure in a fluid","Pascal's law","Buoyancy",
-      "Surface energy and surface tension","Angle of contact","Drops, bubbles and capillary rise",
-      "Viscosity (Poiseuille's equation excluded)","Stokes' law","Terminal velocity",
-      "Streamline flow","Equation of continuity","Bernoulli's theorem and applications",
-      "Modulus of rigidity and bulk modulus",
-      "Wave motion — plane waves only","Longitudinal and transverse waves",
-      "Superposition of waves","Progressive and stationary waves",
-      "Vibration of strings and air columns","Beats",
-      "Speed of sound in gases","Doppler effect (in sound)"
-    ]},
-    {id:"ph-thermal",chapter:"Thermal Physics",topics:[
-      "Thermal expansion — solids, liquids and gases",
-      "Calorimetry and latent heat",
-      "Heat conduction in one dimension",
-      "Elementary concepts of convection and radiation",
-      "Newton's law of cooling",
-      "Ideal gas laws","Specific heats Cv and Cp for monoatomic and diatomic gases",
-      "Isothermal and adiabatic processes","Bulk modulus of gases",
-      "Equivalence of heat and work",
-      "First law of thermodynamics and its applications (ideal gases only)",
-      "Second law of thermodynamics","Reversible and irreversible processes",
-      "Carnot engine and its efficiency",
-      "Blackbody radiation — absorptive and emissive powers","Kirchhoff's law",
-      "Wien's displacement law","Stefan's law"
-    ]},
-    {id:"ph-em",chapter:"Electricity and Magnetism",topics:[
-      "Coulomb's law","Electric field and potential",
-      "Electrical potential energy of point charges and dipoles in uniform field",
-      "Electric field lines","Flux of electric field",
-      "Gauss's law — applications (infinite wire, infinite plane, thin spherical shell)",
-      "Capacitance","Parallel plate capacitor with and without dielectrics",
-      "Capacitors in series and parallel","Energy stored in a capacitor",
-      "Electric current","Ohm's law",
-      "Series and parallel arrangements of resistances and cells",
-      "Kirchhoff's laws and applications","Heating effect of current",
-      "Biot–Savart's law and Ampere's law",
-      "Magnetic field — near a current-carrying wire, along axis of circular coil, inside solenoid",
-      "Force on a moving charge in uniform magnetic field",
-      "Force on a current-carrying wire in uniform magnetic field",
-      "Magnetic moment of a current loop","Effect of uniform magnetic field on a current loop",
-      "Moving coil galvanometer — conversions to voltmeter and ammeter",
-      "Electromagnetic induction — Faraday's law","Lenz's law",
-      "Self and mutual inductance",
-      "RC circuits with DC and AC sources",
-      "LR circuits with DC and AC sources",
-      "LC circuits","LCR series circuits with DC and AC sources"
-    ]},
-    {id:"ph-emw",chapter:"Electromagnetic Waves",topics:[
-      "Electromagnetic waves and their characteristics",
-      "EM spectrum — radio waves, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays",
-      "Elementary facts about uses of each type of EM wave"
-    ]},
-    {id:"ph-optics",chapter:"Optics",topics:[
-      "Rectilinear propagation of light",
-      "Reflection at plane and spherical surfaces",
-      "Refraction at plane and spherical surfaces",
-      "Total internal reflection","Deviation and dispersion of light by a prism",
-      "Thin lenses","Combinations of mirrors and thin lenses","Magnification",
-      "Wave nature of light — Huygens' principle",
-      "Interference — Young's double slit experiment",
-      "Diffraction due to a single slit",
-      "Polarization of light","Plane polarized light",
-      "Brewster's law","Polaroids"
-    ]},
-    {id:"ph-modern",chapter:"Modern Physics",topics:[
-      "Atomic nucleus","Alpha, beta and gamma radiations",
-      "Law of radioactive decay","Decay constant",
-      "Half-life and mean life",
-      "Binding energy and its calculation",
-      "Fission and fusion processes","Energy calculation in fission/fusion",
-      "Photoelectric effect","Bohr's theory of hydrogen-like atoms",
-      "Characteristic and continuous X-rays","Moseley's law",
-      "de Broglie wavelength of matter waves"
-    ]}
-  ],
-  Chemistry: [
-    {id:"ch-gen",chapter:"General Topics",topics:[
-      "Concept of atoms and molecules","Dalton's atomic theory",
-      "Mole concept and Avogadro's number",
-      "Chemical formulae","Balanced chemical equations",
-      "Calculations involving oxidation-reduction reactions",
-      "Calculations involving neutralisation and displacement reactions",
-      "Concentration — mole fraction, molarity, molality and normality"
-    ]},
-    {id:"ch-states",chapter:"States of Matter: Gases and Liquids",topics:[
-      "Gas laws and ideal gas equation","Absolute scale of temperature",
-      "Deviation from ideality — van der Waals equation",
-      "Kinetic theory of gases",
-      "Average, root mean square and most probable velocities and relation with temperature",
-      "Law of partial pressures (Dalton's law)","Diffusion of gases (Graham's law)",
-      "Intermolecular interactions — types, distance dependence, effect on properties",
-      "Liquids — vapour pressure, surface tension, viscosity"
-    ]},
-    {id:"ch-atomic",chapter:"Atomic Structure",topics:[
-      "Bohr model and spectrum of hydrogen atom",
-      "Wave-particle duality","de Broglie hypothesis",
-      "Heisenberg uncertainty principle",
-      "Quantum mechanical picture of hydrogen atom — energies, quantum numbers",
-      "Wave function and probability density (plots only)",
-      "Shapes of s, p and d orbitals",
-      "Aufbau principle","Pauli's exclusion principle","Hund's rule"
-    ]},
-    {id:"ch-bonding",chapter:"Chemical Bonding and Molecular Structure",topics:[
-      "Orbital overlap and covalent bond",
-      "Hybridisation involving s, p and d orbitals",
-      "Molecular orbital energy diagrams for homonuclear diatomic species (up to Ne₂)",
-      "Hydrogen bond","Polarity in molecules and dipole moment",
-      "VSEPR model","Shapes of molecules — linear, angular, triangular, square planar, pyramidal, square pyramidal, trigonal bipyramidal, tetrahedral, octahedral"
-    ]},
-    {id:"ch-thermo",chapter:"Chemical Thermodynamics",topics:[
-      "Intensive and extensive properties","State functions",
-      "First law of thermodynamics","Internal energy, work (pressure-volume only) and heat",
-      "Enthalpy and heat capacity","Standard state and Hess's law",
-      "Enthalpy of reaction, fusion, vaporization and lattice enthalpy",
-      "Second law of thermodynamics","Entropy",
-      "Gibbs energy","Criteria of equilibrium and spontaneity"
-    ]},
-    {id:"ch-equil",chapter:"Chemical and Ionic Equilibrium",topics:[
-      "Law of mass action","Significance of ΔG and ΔG° in equilibrium",
-      "Equilibrium constant Kp and Kc","Reaction quotient",
-      "Le Chatelier's principle — effect of concentration, temperature and pressure",
-      "Solubility product and its applications","Common ion effect",
-      "pH and buffer solutions",
-      "Acids and bases — Brønsted and Lewis concepts",
-      "Hydrolysis of salts"
-    ]},
-    {id:"ch-electro",chapter:"Electrochemistry",topics:[
-      "Electrochemical cells and cell reactions","Standard electrode potentials",
-      "Electrochemical work and Nernst equation",
-      "Electrochemical series","EMF of galvanic cells",
-      "Faraday's laws of electrolysis",
-      "Electrolytic conductance — specific, equivalent and molar conductivity",
-      "Kohlrausch's law","Batteries — primary and secondary","Fuel cells","Corrosion"
-    ]},
-    {id:"ch-kinetics",chapter:"Chemical Kinetics",topics:[
-      "Rates of chemical reactions","Order and molecularity of reactions",
-      "Rate law and rate constant","Half-life",
-      "Differential and integrated rate expressions for zero order reactions",
-      "Differential and integrated rate expressions for first order reactions",
-      "Temperature dependence of rate constant — Arrhenius equation and activation energy",
-      "Catalysis — homogeneous and heterogeneous",
-      "Activity and selectivity of solid catalysts",
-      "Enzyme catalysis and its mechanism"
-    ]},
-    {id:"ch-solid",chapter:"Solid State",topics:[
-      "Classification of solids","Crystalline state",
-      "Seven crystal systems — cell parameters a, b, c, α, β, γ",
-      "Close packed structure — cubic (fcc, bcc) and hexagonal (hcp)",
-      "Packing in fcc, bcc and hcp lattices",
-      "Nearest neighbours","Ionic radii and radius ratio",
-      "Point defects"
-    ]},
-    {id:"ch-solutions",chapter:"Solutions",topics:[
-      "Henry's law","Raoult's law","Ideal solutions",
-      "Colligative properties — lowering of vapour pressure",
-      "Elevation of boiling point","Depression of freezing point",
-      "Osmotic pressure","Van't Hoff factor"
-    ]},
-    {id:"ch-surface",chapter:"Surface Chemistry",topics:[
-      "Adsorption — physisorption and chemisorption",
-      "Freundlich adsorption isotherm",
-      "Colloids — types, methods of preparation and general properties",
-      "Emulsions — elementary ideas","Surfactants and micelles (definitions and examples)"
-    ]},
-    {id:"ch-periodic",chapter:"Classification of Elements and Periodicity",topics:[
-      "Modern periodic law and the present form of periodic table",
-      "Electronic configuration of elements",
-      "Periodic trends — atomic radius","Ionic radius",
-      "Ionization enthalpy","Electron gain enthalpy",
-      "Valence and oxidation states","Electronegativity","Chemical reactivity"
-    ]},
-    {id:"ch-hydrogen",chapter:"Hydrogen",topics:[
-      "Position of hydrogen in periodic table","Occurrence and isotopes",
-      "Preparation, properties and uses of hydrogen",
-      "Hydrides — ionic, covalent and interstitial",
-      "Physical and chemical properties of water and heavy water",
-      "Hydrogen peroxide — preparation, reactions, use and structure",
-      "Hydrogen as a fuel"
-    ]},
-    {id:"ch-sblock",chapter:"s-Block Elements",topics:[
-      "Alkali metals — reactivity towards air, water, dihydrogen, halogens, acids",
-      "Reducing nature of alkali metals including solutions in liquid ammonia",
-      "Uses of alkali metals",
-      "General characteristics of oxides, hydroxides, halides, salts of oxoacids",
-      "Anomalous behaviour of lithium and beryllium",
-      "Alkaline earth metals — reactivity towards air, water, dihydrogen, halogens, acids",
-      "Diagonal relationship (Li–Mg and Be–Al)",
-      "Sodium compounds — Na₂CO₃, NaCl, NaOH, NaHCO₃ (preparation, properties, uses)",
-      "Calcium compounds — CaO, Ca(OH)₂, CaCO₃, CaSO₄ (preparation, properties, uses)"
-    ]},
-    {id:"ch-pblock",chapter:"p-Block Elements",topics:[
-      "Oxidation state and trends in chemical reactivity — Groups 13–17",
-      "Anomalous properties of B, C, N, O and F vs rest of their groups",
-      "Group 13 — reactivity towards acids, alkalis and halogens",
-      "Group 13 compounds — borax, orthoboric acid, diborane, BF₃, AlCl₃, alums",
-      "Uses of boron and aluminium",
-      "Group 14 — reactivity towards water and halogen; allotropes of carbon and uses",
-      "Group 14 compounds — CO, CO₂, SiO₂, silicones, silicates, zeolites",
-      "Group 15 — reactivity towards H₂, O₂ and halogen; allotropes of phosphorus",
-      "Group 15 compounds — N₂, NH₃, HNO₃, PH₃, PCl₃, PCl₅; oxides of N; oxoacids of P",
-      "Group 16 — reactivity towards H₂, O₂ and halogen; simple oxides; allotropes of S",
-      "Group 16 compounds — O₂, O₃, SO₂, H₂SO₄; oxoacids of sulphur",
-      "Group 17 — reactivity towards H₂, O₂ and metals",
-      "Group 17 compounds — Cl₂, HCl, interhalogen compounds; oxoacids of halogens; bleaching powder",
-      "Group 18 — chemical properties and uses; compounds of xenon with F and O"
-    ]},
-    {id:"ch-dblock",chapter:"d-Block Elements",topics:[
-      "Oxidation states and their stability",
-      "Standard electrode potentials of transition metals",
-      "Interstitial compounds and alloys","Catalytic properties",
-      "Applications of d-block elements",
-      "Oxoanions of chromium — preparation, structure and reactions",
-      "Oxoanions of manganese — preparation, structure and reactions"
-    ]},
-    {id:"ch-fblock",chapter:"f-Block Elements",topics:[
-      "Lanthanoid contraction","Actinoid contraction",
-      "Oxidation states of lanthanoids and actinoids",
-      "General characteristics of lanthanoids and actinoids"
-    ]},
-    {id:"ch-coord",chapter:"Coordination Compounds",topics:[
-      "Werner's theory","Nomenclature of coordination compounds",
-      "cis-trans isomerism","Ionization isomerism",
-      "Hybridization and geometries — linear, tetrahedral, square planar, octahedral",
-      "Bonding — Valence Bond Theory (VBT)",
-      "Bonding — Crystal Field Theory (CFT) for octahedral and tetrahedral fields",
-      "Magnetic properties (spin-only) of 3d-series coordination compounds",
-      "Colour of 3d-series coordination compounds",
-      "Ligands and spectrochemical series","Stability of coordination compounds",
-      "Importance and applications","Metal carbonyls"
-    ]},
-    {id:"ch-metals",chapter:"Isolation of Metals",topics:[
-      "Metal ores and their concentration",
-      "Thermodynamic principles of metallurgy — iron, copper, zinc",
-      "Electrochemical principles of metallurgy — aluminium",
-      "Cyanide process — silver and gold","Refining of metals"
-    ]},
-    {id:"ch-qual",chapter:"Principles of Qualitative Analysis",topics:[
-      "Group I cations — Ag⁺, Hg₂²⁺","Group II cations — Cu²⁺, Pb²⁺",
-      "Group III cations — Fe³⁺, Cr³⁺, Al³⁺","Group IV cations — Zn²⁺, Mn²⁺",
-      "Group V cations — Ca²⁺, Ba²⁺","Group VI cations — Mg²⁺",
-      "Anion detection — nitrate, halides (excl. fluoride)",
-      "Anion detection — carbonate, bicarbonate, sulphate, sulphide"
-    ]},
-    {id:"ch-env",chapter:"Environmental Chemistry",topics:[
-      "Atmospheric pollution","Water pollution","Soil pollution",
-      "Industrial waste","Strategies to control environmental pollution",
-      "Green chemistry"
-    ]},
-    {id:"ch-org-basic",chapter:"Basic Principles of Organic Chemistry",topics:[
-      "Hybridisation of carbon","σ and π bonds",
-      "Shapes of simple organic molecules","Aromaticity",
-      "Structural isomerism","Geometrical isomerism",
-      "Stereoisomers — enantiomers, diastereomers, meso compounds (up to 2 asymmetric centres)",
-      "R/S and E/Z configurations excluded",
-      "Empirical and molecular formula determination by combustion method",
-      "IUPAC nomenclature — hydrocarbons and mono/bi-functional derivatives",
-      "Hydrogen bonding effects","Inductive effect",
-      "Resonance (mesomeric) effect","Hyperconjugation",
-      "Acidity and basicity of organic compounds",
-      "Reactive intermediates — carbocations, carbanions, free radicals (homolytic/heterolytic cleavage)"
-    ]},
-    {id:"ch-alkanes",chapter:"Alkanes",topics:[
-      "Homologous series","Physical properties — melting points, boiling points, density",
-      "Effect of branching on physical properties",
-      "Conformations of ethane and butane (Newman projections only)",
-      "Preparation from alkyl halides","Preparation from aliphatic carboxylic acids",
-      "Reactions — combustion","Halogenation (including allylic and benzylic)","Oxidation"
-    ]},
-    {id:"ch-alkenes",chapter:"Alkenes and Alkynes",topics:[
-      "Physical properties — boiling points, density, dipole moments",
-      "Preparation by elimination reactions","Acid catalysed hydration (stereochemistry excluded)",
-      "Metal acetylides","Reactions of alkenes with KMnO₄ and ozone",
-      "Reduction of alkenes and alkynes",
-      "Electrophilic addition of alkenes with X₂, HX, HOX (X = halogen)",
-      "Effect of peroxide on addition reactions",
-      "Cyclic polymerization reaction of alkynes"
-    ]},
-    {id:"ch-benzene",chapter:"Benzene",topics:[
-      "Structure of benzene","Electrophilic substitution — halogenation",
-      "Nitration","Sulphonation",
-      "Friedel-Crafts alkylation","Friedel-Crafts acylation",
-      "Effect of directing groups in monosubstituted benzene"
-    ]},
-    {id:"ch-phenols",chapter:"Phenols",topics:[
-      "Physical properties of phenols","Preparation of phenols",
-      "Electrophilic substitution — halogenation, nitration, sulphonation",
-      "Reimer-Tiemann reaction","Kolbe reaction",
-      "Esterification of phenols","Etherification of phenols",
-      "Aspirin synthesis","Oxidation and reduction of phenol"
-    ]},
-    {id:"ch-alkylhal",chapter:"Alkyl Halides",topics:[
-      "Rearrangement reactions of alkyl carbocation",
-      "Grignard reactions","Nucleophilic substitution reactions",
-      "Stereochemical aspects of nucleophilic substitution"
-    ]},
-    {id:"ch-alcohols",chapter:"Alcohols",topics:[
-      "Physical properties of alcohols",
-      "Esterification","Dehydration — formation of alkenes and ethers",
-      "Reactions with sodium, phosphorus halides, ZnCl₂/conc. HCl, thionyl chloride",
-      "Conversion to aldehydes, ketones and carboxylic acids"
-    ]},
-    {id:"ch-ethers",chapter:"Ethers",topics:[
-      "Preparation by Williamson's synthesis",
-      "C–O bond cleavage reactions of ethers"
-    ]},
-    {id:"ch-aldket",chapter:"Aldehydes and Ketones",topics:[
-      "Preparation from acid chlorides and nitriles",
-      "Preparation of aldehydes from esters",
-      "Benzaldehyde from toluene and benzene",
-      "Reactions — oxidation and reduction",
-      "Oxime and hydrazone formation",
-      "Aldol condensation","Cannizzaro reaction","Haloform reaction",
-      "Nucleophilic addition — RMgX, NaHSO₃, HCN, alcohol, amine"
-    ]},
-    {id:"ch-acids",chapter:"Carboxylic Acids",topics:[
-      "Physical properties","Preparation from nitriles",
-      "Preparation from Grignard reagents",
-      "Preparation by hydrolysis of esters and amides",
-      "Benzoic acid from alkylbenzenes",
-      "Reactions — reduction, halogenation",
-      "Formation of esters, acid chlorides and amides"
-    ]},
-    {id:"ch-amines",chapter:"Amines",topics:[
-      "Preparation from nitro compounds, nitriles and amides",
-      "Hoffmann bromamide degradation",
-      "Gabriel phthalimide synthesis",
-      "Reaction with nitrous acid",
-      "Azo coupling reaction of diazonium salts of aromatic amines",
-      "Sandmeyer and related reactions of diazonium salts",
-      "Carbylamine reaction","Hinsberg test",
-      "Alkylation and acylation reactions of amines"
-    ]},
-    {id:"ch-haloarenes",chapter:"Haloarenes",topics:[
-      "Fittig reaction","Wurtz-Fittig reaction",
-      "Nucleophilic aromatic substitution in haloarenes and substituted haloarenes",
-      "(Benzyne mechanism and cine substitution excluded)"
-    ]},
-    {id:"ch-biomol",chapter:"Biomolecules",topics:[
-      "Carbohydrates — classification",
-      "Monosaccharides — glucose (oxidation, reduction, glycoside formation, anomers)",
-      "Disaccharides — sucrose, maltose, lactose (hydrolysis)",
-      "Proteins — amino acids and peptide linkage",
-      "Primary and secondary structure of peptides",
-      "Types of proteins — fibrous and globular",
-      "Nucleic acids — chemical composition and structure of DNA and RNA"
-    ]},
-    {id:"ch-polymers",chapter:"Polymers",topics:[
-      "Types of polymerization — addition and condensation",
-      "Homo and copolymers",
-      "Natural rubber","Cellulose","Nylon","Teflon","Bakelite","PVC",
-      "Biodegradable polymers","Applications of polymers"
-    ]},
-    {id:"ch-everyday",chapter:"Chemistry in Everyday Life",topics:[
-      "Drug-target interaction",
-      "Therapeutic action and examples of antacids (excluding structures)",
-      "Antihistamines","Tranquilizers","Analgesics",
-      "Antimicrobials","Antifertility drugs",
-      "Artificial sweeteners (names only)",
-      "Soaps, detergents and cleansing action"
-    ]},
-    {id:"ch-practorg",chapter:"Practical Organic Chemistry",topics:[
-      "Detection of elements — N, S, halogens",
-      "Detection of hydroxyl group — alcoholic","Detection of hydroxyl group — phenolic",
-      "Detection of carbonyl group — aldehyde","Detection of carbonyl group — ketone",
-      "Detection of carboxyl group","Detection of amino group","Detection of nitro group"
-    ]}
-  ],
-  Mathematics: [
-    {id:"ma-sets",chapter:"Sets, Relations and Functions",topics:[
-      "Sets and their representations","Empty, finite and infinite sets",
-      "Algebra of sets — union, intersection, complement, difference",
-      "Symmetric difference of sets and algebraic properties",
-      "De-Morgan's laws (for finite number of sets)",
-      "Practical problems based on sets",
-      "Cartesian product of finite sets","Ordered pairs",
-      "Relations — domain and codomain","Equivalence relation",
-      "Functions as mappings — domain, codomain, range",
-      "Invertible functions","Even and odd functions",
-      "Into, onto and one-to-one functions",
-      "Special functions — polynomial, trigonometric, exponential, logarithmic, power, absolute value, greatest integer",
-      "Sum, difference, product and composition of functions"
-    ]},
-    {id:"ma-algebra",chapter:"Algebra",topics:[
-      "Algebra of complex numbers — addition, multiplication, conjugation",
-      "Polar representation of complex numbers",
-      "Properties of modulus and principal argument","Triangle inequality",
-      "Cube roots of unity","Geometric interpretations of complex numbers",
-      "Fundamental theorem of algebra (statement only)",
-      "Quadratic equations with real coefficients",
-      "Relations between roots and coefficients",
-      "Formation of quadratic equations with given roots",
-      "Symmetric functions of roots",
-      "Arithmetic and geometric progressions","Arithmetic and geometric means",
-      "Sums of finite AP and GP","Infinite geometric series",
-      "Sum of first n natural numbers, squares and cubes",
-      "Logarithms and their properties",
-      "Permutations and Combinations",
-      "Binomial theorem for positive integral index",
-      "Properties of binomial coefficients"
-    ]},
-    {id:"ma-matrices",chapter:"Matrices",topics:[
-      "Matrices as rectangular array of real numbers","Equality of matrices",
-      "Addition of matrices","Multiplication by a scalar","Product of matrices",
-      "Transpose of a matrix",
-      "Elementary row and column transformations",
-      "Determinant of a square matrix (order up to 3)",
-      "Adjoint of a matrix","Inverse of a square matrix (order up to 3)",
-      "Properties of matrix operations",
-      "Diagonal, symmetric and skew-symmetric matrices and properties",
-      "Solutions of simultaneous linear equations in 2 or 3 variables"
-    ]},
-    {id:"ma-prob",chapter:"Probability and Statistics",topics:[
-      "Random experiment and sample space",
-      "Types of events — impossible, simple, compound",
-      "Addition and multiplication rules of probability",
-      "Conditional probability","Independence of events",
-      "Total probability","Bayes' theorem",
-      "Probability using permutations and combinations",
-      "Measure of central tendency — mean, median, mode",
-      "Mean deviation","Standard deviation and variance",
-      "Grouped and ungrouped data","Frequency distribution with same mean but different variance",
-      "Random variable","Mean and variance of a random variable"
-    ]},
-    {id:"ma-trig",chapter:"Trigonometry",topics:[
-      "Trigonometric functions — periodicity and graphs",
-      "Addition and subtraction formulae",
-      "Multiple and sub-multiple angle formulae",
-      "General solution of trigonometric equations",
-      "Inverse trigonometric functions — principal value only",
-      "Elementary properties of inverse trig functions"
-    ]},
-    {id:"ma-2d",chapter:"Analytical Geometry: 2D",topics:[
-      "Cartesian coordinates","Distance between two points","Section formulae","Shift of origin",
-      "Equation of a straight line in various forms","Angle between two lines",
-      "Distance of a point from a line",
-      "Lines through the point of intersection of two given lines",
-      "Equation of bisector of angle between two lines","Concurrency of lines",
-      "Centroid, orthocentre, incentre and circumcentre of a triangle",
-      "Equation of a circle in various forms",
-      "Equations of tangent, normal and chord",
-      "Parametric equations of a circle",
-      "Intersection of a circle with a straight line or another circle",
-      "Circle through intersection of two circles and a circle and a straight line",
-      "Parabola — standard form, focus, directrix, eccentricity",
-      "Parametric equations of parabola","Tangent and normal to parabola",
-      "Ellipse — standard form, foci, directrices, eccentricity",
-      "Parametric equations of ellipse","Tangent and normal to ellipse",
-      "Hyperbola — standard form, foci, directrices, eccentricity",
-      "Parametric equations of hyperbola","Tangent and normal to hyperbola",
-      "Locus problems"
-    ]},
-    {id:"ma-3d",chapter:"Analytical Geometry: 3D",topics:[
-      "Distance between two points in 3D",
-      "Direction cosines and direction ratios",
-      "Equation of a straight line in space",
-      "Skew lines and shortest distance between two lines",
-      "Equation of a plane","Distance of a point from a plane",
-      "Angle between two lines","Angle between two planes",
-      "Angle between a line and a plane","Coplanar lines"
-    ]},
-    {id:"ma-vectors",chapter:"Vectors",topics:[
-      "Addition of vectors","Scalar multiplication",
-      "Dot product (scalar product)","Cross product (vector product)",
-      "Scalar triple product","Vector triple product",
-      "Geometrical interpretations of vector products"
-    ]},
-    {id:"ma-diff",chapter:"Differential Calculus",topics:[
-      "Limit of a function at a real number","Continuity of a function",
-      "Limit and continuity of sum, difference, product and quotient of functions",
-      "L'Hôpital's rule","Continuity of composite functions",
-      "Intermediate value property of continuous functions",
-      "Derivative of a function","Derivative of sum, difference, product, quotient of functions",
-      "Chain rule",
-      "Derivatives of polynomial, rational, trigonometric, inverse trig, exponential and logarithmic functions",
-      "Derivatives up to order two of implicit functions",
-      "Tangents and normals","Increasing and decreasing functions",
-      "Second order derivatives","Maximum and minimum values of a function",
-      "Rolle's theorem and Lagrange's Mean Value Theorem",
-      "Geometric interpretation of Rolle's and LMVT"
-    ]},
-    {id:"ma-integral",chapter:"Integral Calculus",topics:[
-      "Integration as inverse of differentiation","Indefinite integrals of standard functions",
-      "Definite integrals as limit of sums",
-      "Properties of definite integrals",
-      "Fundamental theorem of integral calculus",
-      "Integration by parts","Integration by substitution","Integration by partial fractions",
-      "Application — areas bounded by simple curves",
-      "Formation of ordinary differential equations",
-      "Solution of homogeneous ODEs of first order and first degree",
-      "Separation of variables method",
-      "Linear first order differential equations"
-    ]}
-  ]
-};
+async function switchMode(mode){
+  if(mode===activeMode)return;
+  activeMode=mode;
+  editMode=false;
+  load();
+  updateModeUI();
+  switchTab('Physics');
+  updateCountdown();
+  if(sbConfig){
+    setSyncStatus('saving','Syncing…');
+    const pulled=await sbPull();
+    if(pulled){renderChapters();updateStats();}
+    setSyncStatus('connected','Synced');
+  }
+}
 
+function updateModeUI(){
+  const isAdv=activeMode==='adv';
+  document.getElementById('badgeText').textContent=isAdv?'JEE Advanced':'JEE Main';
+  document.getElementById('logoBadge').className='logo-badge'+(isAdv?' adv-badge':'');
+  document.getElementById('accentWord').className=isAdv?'adv-accent':'';
+  document.getElementById('cdTargetLabel').textContent=isAdv?'JEE Advanced — 15 May 2027':'JEE Main — 21 January 2027';
+  document.getElementById('pageTitle').textContent=isAdv?'JEE Advanced — Tracker':'JEE Main — Tracker';
+  // Mode buttons
+  document.getElementById('modeMain').className='mode-btn'+(activeMode==='main'?' mode-active':'');
+  document.getElementById('modeAdv').className='mode-btn'+(isAdv?' mode-adv-active':'');
+  // Reset edit button
+  const eb=document.getElementById('editBtn');
+  eb.classList.remove('edit-on');
+  eb.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Edit Syllabus`;
+  document.getElementById('addChapterArea').style.display='none';
+}
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
 let syllabus = {};
 let checked = {};
-let activeSubject = "Physics";
+let activeSubject = 'Physics';
 let editMode = false;
 
-function uid(){return 'id-'+Math.random().toString(36).slice(2,9)}
+function uid(){ return 'id-'+Math.random().toString(36).slice(2,9) }
 
 function load(){
+  const keys=storageKeys();
   try{
-    const s=localStorage.getItem('jee_syllabus');
-    const c=localStorage.getItem('jee_checked');
-    syllabus = s ? JSON.parse(s) : JSON.parse(JSON.stringify(DEFAULT_SYLLABUS));
-    checked  = c ? JSON.parse(c) : {};
+    const s=localStorage.getItem(keys.syllabus);
+    const c=localStorage.getItem(keys.checked);
+    syllabus=s?JSON.parse(s):JSON.parse(JSON.stringify(defaultSyllabus()));
+    checked=c?JSON.parse(c):{};
   }catch(e){
-    syllabus = JSON.parse(JSON.stringify(DEFAULT_SYLLABUS));
-    checked  = {};
+    syllabus=JSON.parse(JSON.stringify(defaultSyllabus()));
+    checked={};
   }
 }
-
 function save(){
-  localStorage.setItem('jee_syllabus',JSON.stringify(syllabus));
-  localStorage.setItem('jee_checked',JSON.stringify(checked));
+  const keys=storageKeys();
+  localStorage.setItem(keys.syllabus,JSON.stringify(syllabus));
+  localStorage.setItem(keys.checked,JSON.stringify(checked));
   if(sbConfig){
     clearTimeout(saveDebounceTimer);
-    saveDebounceTimer = setTimeout(()=>sbPush(), 1200);
+    saveDebounceTimer=setTimeout(()=>sbPush(),1200);
   }
 }
 
-function topicKey(subject,chapterId,topic,type){
-  // type: 'theory' | 'pyq' | 'practice'
-  return `${subject}::${chapterId}::${topic}::${type}`;
-}
-
+// ─────────────────────────────────────────────
+// TOPIC LOGIC
+// ─────────────────────────────────────────────
+function topicKey(subject,chapterId,topic,type){ return `${subject}::${chapterId}::${topic}::${type}`; }
 function topicDone(subject,chapterId,topic){
-  return checked[topicKey(subject,chapterId,topic,'theory')]
-      && checked[topicKey(subject,chapterId,topic,'pyq')]
-      && checked[topicKey(subject,chapterId,topic,'practice')];
+  return !!(checked[topicKey(subject,chapterId,topic,'theory')]
+    && checked[topicKey(subject,chapterId,topic,'pyq')]
+    && checked[topicKey(subject,chapterId,topic,'practice')]);
 }
-
 function countSubject(subj){
-  const chapters = syllabus[subj]||[];
+  const chapters=syllabus[subj]||[];
   let total=0,done=0;
-  chapters.forEach(ch=>{
-    (ch.topics||[]).forEach(t=>{
-      total++;
-      if(topicDone(subj,ch.id,t))done++;
-    });
-  });
+  chapters.forEach(ch=>{ (ch.topics||[]).forEach(t=>{ total++; if(topicDone(subj,ch.id,t))done++; }); });
   return{total,done};
 }
-
 function updateStats(){
   let allTotal=0,allDone=0;
   ['Physics','Chemistry','Mathematics'].forEach(subj=>{
@@ -1317,44 +568,51 @@ function updateStats(){
   document.getElementById('overallBar').style.width=overallPct+'%';
   document.getElementById('overallPct').textContent=overallPct;
 }
+function chapterColor(subj){ return subj==='Physics'?'phy-color':subj==='Chemistry'?'che-color':'mat-color'; }
 
-function chapterColor(subj){
-  return subj==='Physics'?'phy-color':subj==='Chemistry'?'che-color':'mat-color';
-}
-
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
 function switchTab(subj){
   activeSubject=subj;
   ['Physics','Chemistry','Mathematics'].forEach(s=>{
     const t=document.getElementById('tab-'+s);
     t.className='tab';
-    if(s===subj){
-      const cls=s==='Physics'?'active-phy':s==='Chemistry'?'active-che':'active-mat';
-      t.className='tab '+cls;
-    }
+    if(s===subj){ const cls=s==='Physics'?'active-phy':s==='Chemistry'?'active-che':'active-mat'; t.className='tab '+cls; }
   });
   renderChapters();
   document.getElementById('searchInput').value='';
+}
+
+function makePillsHTML(chId,t){
+  const tDone=checked[topicKey(activeSubject,chId,t,'theory')]?'done':'';
+  const pDone=checked[topicKey(activeSubject,chId,t,'pyq')]?'done':'';
+  const prDone=checked[topicKey(activeSubject,chId,t,'practice')]?'done':'';
+  return `<div class="pill-row">
+    <button class="pill ${tDone}" onclick="togglePill(event,'${escAttr(chId)}','${escAttr(t)}','theory')" title="Theory">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Theory</button>
+    <button class="pill ${pDone}" onclick="togglePill(event,'${escAttr(chId)}','${escAttr(t)}','pyq')" title="PYQs">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>PYQs</button>
+    <button class="pill ${prDone}" onclick="togglePill(event,'${escAttr(chId)}','${escAttr(t)}','practice')" title="Practice">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Practice</button>
+  </div>`;
 }
 
 function renderChapters(){
   const container=document.getElementById('chaptersContainer');
   container.innerHTML='';
   const chapters=syllabus[activeSubject]||[];
-  chapters.forEach((ch,ci)=>{
+  chapters.forEach(ch=>{
     const total=ch.topics.length;
     const done=ch.topics.filter(t=>topicDone(activeSubject,ch.id,t)).length;
     const pct=total>0?Math.round(done/total*100):0;
     const isOpen=ch._open||false;
-
     const div=document.createElement('div');
     div.className='chapter'+(isOpen?' open':'');
     div.id='ch-'+ch.id;
-
     div.innerHTML=`
     <div class="chapter-header" onclick="toggleChapter('${ch.id}')">
-      <div class="ch-arrow">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
+      <div class="ch-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
       <div class="ch-title">${escHtml(ch.chapter)}</div>
       ${pct===100?'<span class="ch-done-badge">✓ Done</span>':''}
       <div class="ch-mini-bar"><div class="ch-mini-fill ${chapterColor(activeSubject)}" style="width:${pct}%"></div></div>
@@ -1368,26 +626,10 @@ function renderChapters(){
       <ul class="topics-list" id="tlist-${ch.id}">
         ${ch.topics.map(t=>{
           const isDone=topicDone(activeSubject,ch.id,t);
-          const tDone=checked[topicKey(activeSubject,ch.id,t,'theory')]?'done':'';
-          const pDone=checked[topicKey(activeSubject,ch.id,t,'pyq')]?'done':'';
-          const prDone=checked[topicKey(activeSubject,ch.id,t,'practice')]?'done':'';
           return `<li class="topic-row${isDone?' checked':''}">
             <div class="topic-done-icon">✓</div>
             <span class="topic-label">${escHtml(t)}</span>
-            <div class="pill-row">
-              <button class="pill ${tDone}" onclick="togglePill(event,'${escAttr(ch.id)}','${escAttr(t)}','theory')" title="Theory">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                Theory
-              </button>
-              <button class="pill ${pDone}" onclick="togglePill(event,'${escAttr(ch.id)}','${escAttr(t)}','pyq')" title="PYQs">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-                PYQs
-              </button>
-              <button class="pill ${prDone}" onclick="togglePill(event,'${escAttr(ch.id)}','${escAttr(t)}','practice')" title="Practice">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                Practice
-              </button>
-            </div>
+            ${makePillsHTML(ch.id,t)}
             <button class="delete-topic-btn" onclick="deleteTopic(event,'${escAttr(ch.id)}','${escAttr(t)}')">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
@@ -1401,19 +643,17 @@ function renderChapters(){
     </div>`;
     container.appendChild(div);
   });
-
   if(editMode) document.body.classList.add('edit-mode');
   else document.body.classList.remove('edit-mode');
   updateStats();
 }
 
-function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function escAttr(s){return s.replace(/'/g,"&#39;").replace(/"/g,'&quot;')}
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+function escAttr(s){ return String(s).replace(/'/g,"&#39;").replace(/"/g,'&quot;') }
 
 function toggleChapter(id){
   if(editMode)return;
-  const chapters=syllabus[activeSubject];
-  const ch=chapters.find(c=>c.id===id);
+  const ch=(syllabus[activeSubject]||[]).find(c=>c.id===id);
   if(ch)ch._open=!ch._open;
   const el=document.getElementById('ch-'+id);
   if(el)el.classList.toggle('open');
@@ -1425,16 +665,11 @@ function togglePill(event,chId,topic,type){
   const k=topicKey(activeSubject,chId,topic,type);
   checked[k]=!checked[k];
   save();
-  // Update pill appearance
   const pill=event.currentTarget;
-  pill.classList.toggle('done', !!checked[k]);
-  // Check if all three are now done
-  const allDone = topicDone(activeSubject,chId,topic);
-  // Update the topic row
-  const row = pill.closest('.topic-row');
-  if(row){
-    row.classList.toggle('checked', allDone);
-  }
+  pill.classList.toggle('done',!!checked[k]);
+  const allDone=topicDone(activeSubject,chId,topic);
+  const row=pill.closest('.topic-row');
+  if(row) row.classList.toggle('checked',allDone);
   renderChapterStats(chId);
   updateStats();
 }
@@ -1462,7 +697,6 @@ function toggleEdit(){
   editMode=!editMode;
   const btn=document.getElementById('editBtn');
   btn.classList.toggle('edit-on',editMode);
-  btn.querySelector('svg+*');
   btn.innerHTML=editMode
     ?`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Done Editing`
     :`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Edit Syllabus`;
@@ -1477,36 +711,12 @@ function addTopic(chId){
   const ch=(syllabus[activeSubject]||[]).find(c=>c.id===chId);
   if(ch){ch.topics.push(val);save();}
   inp.value='';
-  // Re-render the single chapter's topics list
-  const ch2=(syllabus[activeSubject]||[]).find(c=>c.id===chId);
-  if(ch2){
-    const ul=document.getElementById('tlist-'+chId);
-    if(ul){
-      const t=val;
-      const k=topicKey(activeSubject,chId,t);
-      const li=document.createElement('li');
-      li.className='topic-row';
-      li.innerHTML=`<div class="topic-done-icon">✓</div>
-        <span class="topic-label">${escHtml(t)}</span>
-        <div class="pill-row">
-          <button class="pill" onclick="togglePill(event,'${escAttr(chId)}','${escAttr(t)}','theory')">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            Theory
-          </button>
-          <button class="pill" onclick="togglePill(event,'${escAttr(chId)}','${escAttr(t)}','pyq')">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-            PYQs
-          </button>
-          <button class="pill" onclick="togglePill(event,'${escAttr(chId)}','${escAttr(t)}','practice')">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            Practice
-          </button>
-        </div>
-        <button class="delete-topic-btn" onclick="deleteTopic(event,'${escAttr(chId)}','${escAttr(t)}')">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>`;
-      ul.appendChild(li);
-    }
+  const ul=document.getElementById('tlist-'+chId);
+  if(ul){
+    const li=document.createElement('li');
+    li.className='topic-row';
+    li.innerHTML=`<div class="topic-done-icon">✓</div><span class="topic-label">${escHtml(val)}</span>${makePillsHTML(chId,val)}<button class="delete-topic-btn" onclick="deleteTopic(event,'${escAttr(chId)}','${escAttr(val)}')" ><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+    ul.appendChild(li);
   }
   renderChapterStats(chId);
   updateStats();
@@ -1542,17 +752,12 @@ function addChapter(){
   save();
   inp.value='';
   renderChapters();
-  setTimeout(()=>{
-    const containers=document.querySelectorAll('.chapter');
-    const last=containers[containers.length-1];
-    if(last)last.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },50);
+  setTimeout(()=>{ const containers=document.querySelectorAll('.chapter'); const last=containers[containers.length-1]; if(last)last.scrollIntoView({behavior:'smooth',block:'nearest'}); },50);
 }
 
 function filterTopics(query){
   const q=query.trim().toLowerCase();
-  const chapters=document.querySelectorAll('.chapter');
-  chapters.forEach(ch=>{
+  document.querySelectorAll('.chapter').forEach(ch=>{
     const rows=ch.querySelectorAll('.topic-row');
     let vis=0;
     rows.forEach(row=>{
@@ -1567,53 +772,182 @@ function filterTopics(query){
 }
 
 function resetConfirm(){
-  if(confirm('Reset ALL ticks?\n\nYour custom chapters/topics will be kept. Press OK to clear progress.')){
+  if(confirm('Reset ALL ticks for '+( activeMode==='main'?'JEE Main':'JEE Advanced')+'?\n\nCustom chapters/topics are kept.')){
     checked={};save();renderChapters();
   }
 }
 function revertSyllabus(){
-  if(confirm('Revert to official JEE Advanced syllabus?\n\nThis removes any custom additions AND clears all ticks.')){
-    syllabus=JSON.parse(JSON.stringify(DEFAULT_SYLLABUS));
+  const examName=activeMode==='main'?'JEE Main 2026':'JEE Advanced 2026';
+  if(confirm('Revert to official '+examName+' syllabus?\n\nThis removes custom additions AND clears all ticks.')){
+    syllabus=JSON.parse(JSON.stringify(defaultSyllabus()));
     checked={};save();renderChapters();
   }
 }
 
-// ── COUNTDOWN ──
+// ─────────────────────────────────────────────
+// COUNTDOWN
+// ─────────────────────────────────────────────
+let countdownInterval=null;
 function updateCountdown(){
-  const target=new Date('2027-05-15T00:00:00').getTime();
-  const now=Date.now();
-  const diff=target-now;
+  const target=new Date(activeMode==='main'?'2027-01-21T00:00:00':'2027-05-15T00:00:00').getTime();
+  const diff=target-Date.now();
   if(diff<=0){
     ['cdDays','cdHours','cdMins','cdSecs'].forEach(id=>document.getElementById(id).textContent='0');
     return;
   }
-  const days=Math.floor(diff/(1000*60*60*24));
-  const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const mins=Math.floor((diff%(1000*60*60))/(1000*60));
-  const secs=Math.floor((diff%(1000*60))/1000);
-  document.getElementById('cdDays').textContent=days;
-  document.getElementById('cdHours').textContent=String(hours).padStart(2,'0');
-  document.getElementById('cdMins').textContent=String(mins).padStart(2,'0');
-  document.getElementById('cdSecs').textContent=String(secs).padStart(2,'0');
+  document.getElementById('cdDays').textContent=Math.floor(diff/(1000*60*60*24));
+  document.getElementById('cdHours').textContent=String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+  document.getElementById('cdMins').textContent=String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2,'0');
+  document.getElementById('cdSecs').textContent=String(Math.floor((diff%(1000*60))/1000)).padStart(2,'0');
 }
 setInterval(updateCountdown,1000);
-updateCountdown();
 
-// ── INIT ──
+// ─────────────────────────────────────────────
+// SYLLABUS DATA — JEE MAIN
+// ─────────────────────────────────────────────
+const DEFAULT_MAIN = {
+  Physics: [
+    {id:"ph-u1",chapter:"Unit 1: Units and Measurements",topics:["Units of measurement and system of units","SI Units — fundamental and derived","Least count and significant figures","Errors in measurements — absolute, relative, percentage","Dimensions of physical quantities","Dimensional analysis and applications"]},
+    {id:"ph-u2",chapter:"Unit 2: Kinematics",topics:["Frame of reference","Motion in a straight line — speed and velocity","Uniform and non-uniform motion","Average speed and instantaneous velocity","Uniformly accelerated motion","Velocity-time and position-time graphs","Relations for uniformly accelerated motion","Relative velocity","Motion in a plane","Projectile motion","Uniform circular motion"]},
+    {id:"ph-u3",chapter:"Unit 3: Laws of Motion",topics:["Force and inertia — Newton's first law","Momentum and Newton's second law","Impulse","Newton's third law","Conservation of linear momentum and applications","Equilibrium of concurrent forces","Static and kinetic friction — laws and rolling friction","Dynamics of uniform circular motion","Centripetal force","Vehicle on level circular road","Vehicle on banked road"]},
+    {id:"ph-u4",chapter:"Unit 4: Work, Energy and Power",topics:["Work done by constant and variable forces","Kinetic and potential energies","Work-energy theorem","Power","Potential energy of a spring","Conservation of mechanical energy","Conservative and non-conservative forces","Motion in a vertical circle","Elastic and inelastic collisions in 1D and 2D"]},
+    {id:"ph-u5",chapter:"Unit 5: Rotational Motion",topics:["Centre of mass — two-particle system and rigid body","Basic concepts of rotational motion","Moment of force — torque","Angular momentum","Conservation of angular momentum and applications","Moment of inertia and radius of gyration","Values of MI for simple geometrical objects","Parallel and perpendicular axes theorems","Equilibrium of rigid bodies","Rigid body rotation and equations of rotational motion","Comparison of linear and rotational motions"]},
+    {id:"ph-u6",chapter:"Unit 6: Gravitation",topics:["Universal law of gravitation","Acceleration due to gravity — variation with altitude and depth","Kepler's laws of planetary motion","Gravitational potential energy and potential","Escape velocity","Motion of a satellite","Orbital velocity","Time period and energy of satellite"]},
+    {id:"ph-u7",chapter:"Unit 7: Properties of Solids and Liquids",topics:["Elastic behaviour — stress-strain relationship","Hooke's law","Young's modulus","Bulk modulus and modulus of rigidity","Pressure in fluid column — Pascal's law and applications","Viscosity — Stoke's law, terminal velocity","Streamline and turbulent flow","Critical velocity","Bernoulli's principle and applications","Surface energy and surface tension","Angle of contact","Excess pressure across curved surface","Application of surface tension — drops, bubbles, capillary rise","Heat, temperature, thermal expansion","Specific heat capacity and calorimetry","Change of state and latent heat","Heat transfer — conduction, convection and radiation"]},
+    {id:"ph-u8",chapter:"Unit 8: Thermodynamics",topics:["Thermal equilibrium and zeroth law of thermodynamics","Heat, work and internal energy","First law of thermodynamics","Isothermal and adiabatic processes","Second law — reversible and irreversible processes"]},
+    {id:"ph-u9",chapter:"Unit 9: Kinetic Theory of Gases",topics:["Equation of state of a perfect gas","Work done on compressing a gas","Kinetic theory assumptions and concept of pressure","Kinetic interpretation of temperature","RMS speed of gas molecules","Degrees of freedom","Law of equipartition of energy","Applications to specific heat capacities","Mean free path","Avogadro's number"]},
+    {id:"ph-u10",chapter:"Unit 10: Oscillations and Waves",topics:["Oscillations — time period, frequency, displacement","Periodic functions","Simple harmonic motion and its equation","Phase","Oscillations of spring — restoring force and force constant","Energy in SHM — kinetic and potential","Simple pendulum — time period derivation","Wave motion — longitudinal and transverse waves","Speed of travelling wave","Displacement relation for progressive wave","Superposition of waves","Reflection of waves","Standing waves in strings and organ pipes","Fundamental mode and harmonics","Beats","Doppler effect"]},
+    {id:"ph-u11",chapter:"Unit 11: Electrostatics",topics:["Electric charges — conservation","Coulomb's law","Superposition principle","Continuous charge distribution","Electric field — point charge, dipole, torque on dipole","Electric field lines","Electric flux","Gauss's law and applications","Electric potential — point charge, dipole, system of charges","Potential difference and equipotential surfaces","Electrical potential energy of two charges and dipole","Conductors, insulators, dielectrics and polarization","Capacitors and capacitance — series and parallel combinations","Parallel plate capacitor with and without dielectric","Energy stored in capacitor"]},
+    {id:"ph-u12",chapter:"Unit 12: Current Electricity",topics:["Electric current — drift velocity, mobility","Ohm's law","Electrical resistance","I-V characteristics — ohmic and non-ohmic","Electrical energy and power","Resistivity and conductivity","Series and parallel combinations of resistors","Temperature dependence of resistance","Internal resistance, emf and potential difference","Cells in series and parallel","Kirchhoff's laws and applications","Wheatstone bridge","Metre bridge"]},
+    {id:"ph-u13",chapter:"Unit 13: Magnetic Effects of Current and Magnetism",topics:["Biot-Savart law — application to circular loop","Ampere's law — infinite wire and solenoid","Force on moving charge in magnetic and electric fields","Force on current-carrying conductor in magnetic field","Force between parallel current-carrying conductors — definition of ampere","Torque on current loop in uniform magnetic field","Moving coil galvanometer — sensitivity, conversion to ammeter/voltmeter","Current loop as magnetic dipole","Bar magnet as equivalent solenoid","Magnetic field due to magnetic dipole — along axis and perpendicular","Torque on magnetic dipole in uniform field","Para-, dia- and ferromagnetic substances with examples","Effect of temperature on magnetic properties"]},
+    {id:"ph-u14",chapter:"Unit 14: Electromagnetic Induction and AC",topics:["Electromagnetic induction — Faraday's law","Induced emf and current","Lenz's law","Eddy currents","Self and mutual inductance","Alternating currents — peak and RMS values","Reactance and impedance","LCR series circuit and resonance","Power in AC circuits and wattless current","AC generator","Transformer"]},
+    {id:"ph-u15",chapter:"Unit 15: Electromagnetic Waves",topics:["Displacement current","Electromagnetic waves and characteristics","Transverse nature of EM waves","EM spectrum — radio, microwave, infrared, visible, UV, X-rays, gamma","Applications of EM waves"]},
+    {id:"ph-u16",chapter:"Unit 16: Optics",topics:["Reflection of light — spherical mirrors, mirror formula","Refraction at plane and spherical surfaces","Thin lens formula and lens maker formula","Total internal reflection and applications","Magnification","Power of lens","Combination of thin lenses in contact","Refraction through prism","Microscope and astronomical telescope","Wave optics — wavefront and Huygens' principle","Laws of reflection and refraction using Huygens' principle","Interference — Young's double slit, fringe width, coherent sources","Diffraction due to single slit — width of central maximum","Polarization — plane polarized light, Brewster's law, Polaroids"]},
+    {id:"ph-u17",chapter:"Unit 17: Dual Nature of Matter and Radiation",topics:["Dual nature of radiation","Photoelectric effect","Hertz and Lenard's observations","Einstein's photoelectric equation","Particle nature of light","Matter waves — wave nature of particle","de Broglie relation"]},
+    {id:"ph-u18",chapter:"Unit 18: Atoms and Nuclei",topics:["Alpha-particle scattering — Rutherford's model","Bohr model — energy levels","Hydrogen spectrum","Composition and size of nucleus","Atomic masses","Mass-energy relation and mass defect","Binding energy per nucleon and variation with mass number","Nuclear fission and fusion"]},
+    {id:"ph-u19",chapter:"Unit 19: Electronic Devices",topics:["Semiconductors","p-n junction diode — I-V characteristics (forward and reverse bias)","Diode as rectifier","I-V characteristics of LED, photodiode, solar cell","Zener diode and Zener diode as voltage regulator","Logic gates — OR, AND, NOT, NAND, NOR"]},
+    {id:"ph-u20",chapter:"Unit 20: Experimental Skills",topics:["Vernier callipers — internal, external diameter, depth of vessel","Screw gauge — thickness/diameter of thin sheet/wire","Simple pendulum — dissipation of energy (amplitude-time graph)","Metre scale — mass by principle of moments","Young's modulus of elasticity of metallic wire","Surface tension by capillary rise and effect of detergents","Coefficient of viscosity by terminal velocity","Speed of sound using resonance tube","Specific heat capacity by method of mixtures (solid and liquid)","Resistivity using metre bridge","Resistance using Ohm's law","Figure of merit of galvanometer by half-deflection method","Focal length — convex mirror, concave mirror, convex lens (parallax method)","Angle of deviation vs angle of incidence for prism","Refractive index of glass slab using travelling microscope","Characteristic curves of p-n junction diode","Characteristic curves of Zener diode — reverse breakdown voltage","Identification of diode, LED, resistor, capacitor from mixed collection"]}
+  ],
+  Chemistry: [
+    {id:"ch-u1",chapter:"Unit 1: Some Basic Concepts in Chemistry",topics:["Matter and its nature","Dalton's atomic theory","Concept of atom, molecule, element and compound","Laws of chemical combination","Atomic and molecular masses","Mole concept and molar mass","Percentage composition","Empirical and molecular formulae","Chemical equations and stoichiometry"]},
+    {id:"ch-u2",chapter:"Unit 2: Atomic Structure",topics:["Nature of electromagnetic radiation","Photoelectric effect","Spectrum of hydrogen atom","Bohr model — postulates, energy and radii derivation","Limitations of Bohr's model","Dual nature of matter — de Broglie's relationship","Heisenberg uncertainty principle","Elementary ideas of quantum mechanics","Quantum mechanical model — atomic orbitals as wave functions","Variation of ψ and ψ² with r for 1s and 2s orbitals","Quantum numbers — principal, angular momentum, magnetic","Shapes of s, p and d orbitals","Electron spin and spin quantum number","Aufbau principle","Pauli's exclusion principle","Hund's rule","Electronic configuration — extra stability of half-filled and fully-filled orbitals"]},
+    {id:"ch-u3",chapter:"Unit 3: Chemical Bonding and Molecular Structure",topics:["Kossel-Lewis approach — ionic and covalent bond formation","Ionic bonding — lattice enthalpy calculation","Covalent bonding — electronegativity, Fajan's rule, dipole moment","VSEPR theory and shapes of simple molecules","Valence bond theory — hybridisation (s, p, d), resonance","Molecular orbital theory — LCAO, bonding and antibonding MOs","σ and π bonds","MO electronic configurations of homonuclear diatomics","Bond order, bond length and bond energy","Metallic bonding (elementary)","Hydrogen bonding and applications"]},
+    {id:"ch-u4",chapter:"Unit 4: Chemical Thermodynamics",topics:["System and surroundings — extensive and intensive properties","State functions and entropy","Types of processes","First law — work, heat, internal energy and enthalpy","Heat capacity and molar heat capacity","Hess's law of constant heat summation","Enthalpies of bond dissociation, combustion, formation, atomization","Enthalpies of sublimation, phase transition, hydration, ionization, solution","Second law — spontaneity, ΔS and ΔG as criteria","ΔG° and equilibrium constant"]},
+    {id:"ch-u5",chapter:"Unit 5: Solutions",topics:["Concentration expressions — molality, molarity, mole fraction, percentage","Vapour pressure and Raoult's law","Ideal and non-ideal solutions","Vapour pressure-composition plots","Colligative properties — relative lowering of vapour pressure","Depression of freezing point","Elevation of boiling point","Osmotic pressure","Determination of molecular mass using colligative properties","Abnormal molar mass","van't Hoff factor"]},
+    {id:"ch-u6",chapter:"Unit 6: Equilibrium",topics:["Dynamic equilibrium concept","Physical process equilibria — solid-liquid, liquid-gas, gas-gas, Henry's law","Law of chemical equilibrium — Kp and Kc","ΔG and ΔG° in chemical equilibrium","Factors affecting equilibrium — Le Chatelier's principle","Ionic equilibrium — weak and strong electrolytes","Arrhenius, Brønsted-Lowry and Lewis acid-base concepts","Acid-base equilibria and ionization constants","Ionization of water and pH scale","Common ion effect","Hydrolysis of salts and pH","Solubility of sparingly soluble salts — Ksp","Buffer solutions"]},
+    {id:"ch-u7",chapter:"Unit 7: Redox Reactions and Electrochemistry",topics:["Electronic concepts of oxidation and reduction","Oxidation number — rules and assigning","Balancing of redox reactions","Electrolytic and metallic conduction","Molar conductivities and variation with concentration","Kohlrausch's law and applications","Electrochemical cells — electrolytic and galvanic","Types of electrodes","Standard electrode potential","Half-cell and cell reactions","EMF measurement and Nernst equation","Cell potential and Gibbs' energy change","Dry cell, lead accumulator, fuel cells"]},
+    {id:"ch-u8",chapter:"Unit 8: Chemical Kinetics",topics:["Rate of reaction — factors affecting (concentration, temperature, pressure, catalyst)","Elementary and complex reactions","Order and molecularity","Rate law, rate constant and units","Integrated forms of zero and first-order reactions — half-lives","Temperature dependence — Arrhenius theory and activation energy","Collision theory (no derivation)"]},
+    {id:"ch-u9",chapter:"Unit 9: Classification of Elements and Periodicity",topics:["Modern periodic law and present periodic table","s, p, d and f block elements","Periodic trends — atomic and ionic radii","Ionization enthalpy","Electron gain enthalpy","Valence, oxidation states and chemical reactivity","Electronegativity"]},
+    {id:"ch-u10",chapter:"Unit 10: p-Block Elements",topics:["Groups 13–18 — electronic configuration and general trends","Physical and chemical properties across periods and down groups","Unique behaviour of first element in each group","Group 13 — boron family","Group 14 — carbon family","Group 15 — nitrogen family","Group 16 — oxygen family","Group 17 — halogens","Group 18 — noble gases"]},
+    {id:"ch-u11",chapter:"Unit 11: d- and f-Block Elements",topics:["Transition elements — electronic configuration, occurrence, characteristics","General trends in first-row transition elements — physical properties","Ionization enthalpy, oxidation states, atomic radii, colour","Catalytic behaviour, magnetic properties, complex formation","Interstitial compounds and alloy formation","K₂Cr₂O₇ — preparation, properties and uses","KMnO₄ — preparation, properties and uses","Lanthanoids — electronic configuration, oxidation states, lanthanoid contraction","Actinoids — electronic configuration and oxidation states"]},
+    {id:"ch-u12",chapter:"Unit 12: Coordination Compounds",topics:["Introduction and Werner's theory","Ligands, coordination number, denticity, chelation","IUPAC nomenclature of mononuclear complexes","Isomerism in coordination compounds","Valence bond approach","Basic ideas of crystal field theory","Colour and magnetic properties of complexes","Importance — qualitative analysis, metal extraction, biological systems"]},
+    {id:"ch-u13",chapter:"Unit 13: Purification and Characterisation of Organic Compounds",topics:["Purification — crystallization, sublimation, distillation, differential extraction, chromatography","Qualitative analysis — detection of N, S, P and halogens","Quantitative analysis — estimation of C, H, N, halogens, S, P","Empirical and molecular formula calculations","Numerical problems in organic quantitative analysis"]},
+    {id:"ch-u14",chapter:"Unit 14: Basic Principles of Organic Chemistry",topics:["Tetravalency of carbon and shapes of simple molecules","Hybridisation (s and p)","Classification by functional groups — halogens, O, N, S","Homologous series","Isomerism — structural and stereoisomerism","Nomenclature — trivial and IUPAC","Covalent bond fission — homolytic and heterolytic","Free radicals, carbocations, carbanions","Stability of carbocations and free radicals","Electrophiles and nucleophiles","Inductive effect, electromeric effect, resonance, hyperconjugation","Types of organic reactions — substitution, addition, elimination, rearrangement"]},
+    {id:"ch-u15",chapter:"Unit 15: Hydrocarbons",topics:["Alkanes — conformations (Sawhorse and Newman projections of ethane)","Mechanism of halogenation of alkanes","Alkenes — geometrical isomerism","Electrophilic addition mechanism","Addition of H₂, halogens, water, HX (Markovnikov's and peroxide effect)","Ozonolysis and polymerization of alkenes","Alkynes — acidic character","Addition of H₂, halogens, water, HX","Polymerization","Aromatic hydrocarbons — nomenclature, benzene structure and aromaticity","Mechanism of electrophilic substitution — halogenation, nitration","Friedel-Crafts alkylation and acylation","Directive influence of functional group in monosubstituted benzene"]},
+    {id:"ch-u16",chapter:"Unit 16: Organic Compounds Containing Halogens",topics:["General methods of preparation, properties and reactions","Nature of C-X bond","Mechanisms of substitution reactions","Uses and environmental effects of chloroform, iodoform, freons and DDT"]},
+    {id:"ch-u17",chapter:"Unit 17: Organic Compounds Containing Oxygen",topics:["Alcohols — identification of 1°, 2°, 3°; mechanism of dehydration","Phenols — acidic nature, electrophilic substitution (halogenation, nitration, sulphonation)","Reimer-Tiemann reaction","Ethers — structure","Aldehydes and ketones — nature of carbonyl group","Nucleophilic addition to C=O — HCN, NH₃ and derivatives, Grignard reagent","Oxidation and reduction (Wolff-Kishner and Clemmensen)","Acidity of α-hydrogen","Aldol condensation","Cannizzaro reaction","Haloform reaction","Tests to distinguish aldehydes and ketones","Carboxylic acids — acidic strength and factors affecting it"]},
+    {id:"ch-u18",chapter:"Unit 18: Organic Compounds Containing Nitrogen",topics:["Amines — nomenclature, classification, structure","Basic character of amines","Identification of 1°, 2°, 3° amines","Diazonium salts — importance in synthetic organic chemistry"]},
+    {id:"ch-u19",chapter:"Unit 19: Biomolecules",topics:["Carbohydrates — classification, aldoses and ketoses","Monosaccharides — glucose and fructose","Constituent monosaccharides of sucrose, lactose and maltose","Proteins — α-amino acids, peptide bond, polypeptides","Primary, secondary, tertiary and quaternary structure (qualitative)","Denaturation of proteins and enzymes","Vitamins — classification and functions","Nucleic acids — chemical constitution of DNA and RNA, biological functions","Hormones — general introduction"]},
+    {id:"ch-u20",chapter:"Unit 20: Principles of Practical Chemistry",topics:["Detection of N, S, halogens in organic compounds","Detection of functional groups — hydroxyl (alcoholic and phenolic)","Detection of carbonyl (aldehyde and ketone)","Detection of carboxyl and amino groups","Preparation of Mohr's salt and potash alum","Preparation of acetanilide, p-nitroacetanilide, aniline yellow, iodoform","Titrimetric exercises — acid-base with indicators","Oxalic acid vs KMnO₄ titration","Mohr's salt vs KMnO₄ titration","Qualitative salt analysis — cations: Pb²⁺, Cu²⁺, Al³⁺, Fe³⁺, Zn²⁺, Ni²⁺, Ca²⁺, Ba²⁺, Mg²⁺, NH₄⁺","Qualitative salt analysis — anions: CO₃²⁻, S²⁻, SO₄²⁻, NO₃⁻, NO₂⁻, Cl⁻, Br⁻, I⁻","Enthalpy of solution of CuSO₄","Enthalpy of neutralization of strong acid and base","Preparation of lyophilic and lyophobic sols","Kinetic study of I⁻ with H₂O₂ at room temperature"]}
+  ],
+  Mathematics: [
+    {id:"ma-u1",chapter:"Unit 1: Sets, Relations and Functions",topics:["Sets and their representation — union, intersection, complement","Algebraic properties of sets","Power set","Relations — types of relations, equivalence relations","Functions — one-one, into, onto","Composition of functions"]},
+    {id:"ma-u2",chapter:"Unit 2: Complex Numbers and Quadratic Equations",topics:["Complex numbers as ordered pairs of reals","Representation as a+ib and in Argand diagram","Algebra of complex numbers","Modulus and argument of complex number","Quadratic equations in real and complex number systems","Relations between roots and coefficients","Nature of roots","Formation of quadratic equations with given roots"]},
+    {id:"ma-u3",chapter:"Unit 3: Matrices and Determinants",topics:["Matrices — algebra and types","Determinants of order 2 and 3","Evaluation of determinants","Area of triangles using determinants","Adjoint and inverse of square matrix","Test of consistency and solution of simultaneous linear equations (2 or 3 variables)"]},
+    {id:"ma-u4",chapter:"Unit 4: Permutations and Combinations",topics:["Fundamental principle of counting","Permutations — meaning of P(n,r)","Combinations — meaning of C(n,r)","Simple applications"]},
+    {id:"ma-u5",chapter:"Unit 5: Binomial Theorem",topics:["Binomial theorem for positive integral index","General term and middle term","Simple applications"]},
+    {id:"ma-u6",chapter:"Unit 6: Sequence and Series",topics:["Arithmetic progressions","Geometric progressions","Insertion of AM and GM between two numbers","Relation between AM and GM","Sum of finite AP and GP"]},
+    {id:"ma-u7",chapter:"Unit 7: Limit, Continuity and Differentiability",topics:["Real-valued functions — polynomial, rational, trigonometric, log, exponential","Inverse functions","Graphs of simple functions","Limits, continuity and differentiability","Differentiation — sum, difference, product, quotient of functions","Differentiation of trigonometric, inverse trig, log, exponential, composite and implicit functions","Derivatives of order up to two","Applications — rate of change of quantities","Monotonic functions — increasing and decreasing","Maxima and minima of one-variable functions"]},
+    {id:"ma-u8",chapter:"Unit 8: Integral Calculus",topics:["Integral as anti-derivative","Standard integrals — algebraic, trig, exponential, log","Integration by substitution","Integration by parts","Integration by partial fractions","Integration using trigonometric identities","Fundamental theorem of calculus","Properties of definite integrals","Evaluation of definite integrals","Determining areas bounded by simple curves in standard forms"]},
+    {id:"ma-u9",chapter:"Unit 9: Differential Equations",topics:["Ordinary differential equations — order and degree","Solution by separation of variables","Solution of homogeneous differential equations","Linear differential equation of type dy/dx + Py = Q"]},
+    {id:"ma-u10",chapter:"Unit 10: Co-ordinate Geometry",topics:["Cartesian system — distance formula, section formula","Locus and its equation","Slope of line — parallel and perpendicular lines","Intercepts of a line","Various forms of equations of a line","Intersection of lines","Angle between two lines","Conditions for concurrence of three lines","Distance of a point from a line","Centroid, orthocentre, circumcentre of triangle","Standard equation of circle — general form, radius and centre","Circle with endpoints of diameter given","Line and circle intersection","Sections of conics — parabola, ellipse, hyperbola in standard form"]},
+    {id:"ma-u11",chapter:"Unit 11: Three Dimensional Geometry",topics:["Coordinates in space — distance between two points","Section formula","Direction ratios and direction cosines","Angle between two intersecting lines","Equation of a line in space","Skew lines — shortest distance and its equation"]},
+    {id:"ma-u12",chapter:"Unit 12: Vector Algebra",topics:["Vectors and scalars","Addition of vectors","Components of vector in 2D and 3D","Scalar (dot) product","Vector (cross) product"]},
+    {id:"ma-u13",chapter:"Unit 13: Statistics and Probability",topics:["Measures of dispersion — mean, median, mode (grouped and ungrouped)","Standard deviation, variance and mean deviation (grouped and ungrouped)","Probability of an event","Addition and multiplication theorems of probability","Bayes' theorem","Probability distribution of a random variable"]},
+    {id:"ma-u14",chapter:"Unit 14: Trigonometry",topics:["Trigonometric identities and functions","Inverse trigonometric functions and their properties"]}
+  ]
+};
+
+// ─────────────────────────────────────────────
+// SYLLABUS DATA — JEE ADVANCED
+// ─────────────────────────────────────────────
+const DEFAULT_ADV = {
+  Physics: [
+    {id:"ph-gen",chapter:"General",topics:["Units and dimensions","Dimensional analysis","Least count and significant figures","Error analysis — absolute, relative, percentage","Propagation of errors in calculations","Experiment: Vernier callipers and screw gauge (micrometre)","Experiment: Determination of g using simple pendulum","Experiment: Young's modulus — elasticity of material","Experiment: Surface tension of water by capillary rise and effect of detergents","Experiment: Specific heat of a liquid using calorimeter","Experiment: Focal length of concave mirror and convex lens (u-v method)","Experiment: Speed of sound using resonance column","Experiment: Verification of Ohm's law using voltmeter and ammeter","Experiment: Specific resistance using metre bridge and post office box"]},
+    {id:"ph-mech",chapter:"Mechanics",topics:["Kinematics in 1D and 2D (Cartesian only)","Projectile motion","Uniform circular motion","Relative velocity","Newton's laws of motion","Inertial and uniformly accelerated frames of reference","Static and dynamic friction","Kinetic and potential energy","Work and power","Conservation of linear momentum and mechanical energy","Systems of particles","Centre of mass and its motion","Impulse","Elastic and inelastic collisions","Rigid body — moment of inertia","Parallel and perpendicular axes theorems","Moment of inertia of uniform bodies with simple geometrical shapes","Angular momentum","Torque","Conservation of angular momentum","Dynamics of rigid bodies with fixed axis of rotation","Rolling without slipping — rings, cylinders and spheres","Equilibrium of rigid bodies","Collision of point masses with rigid bodies","Forced and damped oscillation (1D)","Resonance","Linear and angular simple harmonic motions","Hooke's law and Young's modulus","Law of gravitation","Gravitational potential and field","Acceleration due to gravity","Kepler's laws","Geostationary orbits","Motion of planets and satellites in circular orbits","Escape velocity","Pressure in a fluid","Pascal's law","Buoyancy","Surface energy and surface tension","Angle of contact","Drops, bubbles and capillary rise","Viscosity (Poiseuille's equation excluded)","Stokes' law","Terminal velocity","Streamline flow","Equation of continuity","Bernoulli's theorem and applications","Modulus of rigidity and bulk modulus","Wave motion — plane waves only","Longitudinal and transverse waves","Superposition of waves","Progressive and stationary waves","Vibration of strings and air columns","Beats","Speed of sound in gases","Doppler effect (in sound)"]},
+    {id:"ph-thermal",chapter:"Thermal Physics",topics:["Thermal expansion — solids, liquids and gases","Calorimetry and latent heat","Heat conduction in one dimension","Elementary concepts of convection and radiation","Newton's law of cooling","Ideal gas laws","Specific heats Cv and Cp for monoatomic and diatomic gases","Isothermal and adiabatic processes","Bulk modulus of gases","Equivalence of heat and work","First law of thermodynamics and its applications (ideal gases only)","Second law of thermodynamics","Reversible and irreversible processes","Carnot engine and its efficiency","Blackbody radiation — absorptive and emissive powers","Kirchhoff's law","Wien's displacement law","Stefan's law"]},
+    {id:"ph-em",chapter:"Electricity and Magnetism",topics:["Coulomb's law","Electric field and potential","Electrical potential energy of point charges and dipoles in uniform field","Electric field lines","Flux of electric field","Gauss's law — applications (infinite wire, infinite plane, thin spherical shell)","Capacitance","Parallel plate capacitor with and without dielectrics","Capacitors in series and parallel","Energy stored in a capacitor","Electric current","Ohm's law","Series and parallel arrangements of resistances and cells","Kirchhoff's laws and applications","Heating effect of current","Biot–Savart's law and Ampere's law","Magnetic field — near a current-carrying wire, along axis of circular coil, inside solenoid","Force on a moving charge in uniform magnetic field","Force on a current-carrying wire in uniform magnetic field","Magnetic moment of a current loop","Effect of uniform magnetic field on a current loop","Moving coil galvanometer — conversions to voltmeter and ammeter","Electromagnetic induction — Faraday's law","Lenz's law","Self and mutual inductance","RC circuits with DC and AC sources","LR circuits with DC and AC sources","LC circuits","LCR series circuits with DC and AC sources"]},
+    {id:"ph-emw",chapter:"Electromagnetic Waves",topics:["Electromagnetic waves and their characteristics","EM spectrum — radio waves, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays","Elementary facts about uses of each type of EM wave"]},
+    {id:"ph-optics",chapter:"Optics",topics:["Rectilinear propagation of light","Reflection at plane and spherical surfaces","Refraction at plane and spherical surfaces","Total internal reflection","Deviation and dispersion of light by a prism","Thin lenses","Combinations of mirrors and thin lenses","Magnification","Wave nature of light — Huygens' principle","Interference — Young's double slit experiment","Diffraction due to a single slit","Polarization of light","Plane polarized light","Brewster's law","Polaroids"]},
+    {id:"ph-modern",chapter:"Modern Physics",topics:["Atomic nucleus","Alpha, beta and gamma radiations","Law of radioactive decay","Decay constant","Half-life and mean life","Binding energy and its calculation","Fission and fusion processes","Energy calculation in fission/fusion","Photoelectric effect","Bohr's theory of hydrogen-like atoms","Characteristic and continuous X-rays","Moseley's law","de Broglie wavelength of matter waves"]}
+  ],
+  Chemistry: [
+    {id:"ch-gen",chapter:"General Topics",topics:["Concept of atoms and molecules","Dalton's atomic theory","Mole concept and Avogadro's number","Chemical formulae","Balanced chemical equations","Calculations involving oxidation-reduction reactions","Calculations involving neutralisation and displacement reactions","Concentration — mole fraction, molarity, molality and normality"]},
+    {id:"ch-states",chapter:"States of Matter: Gases and Liquids",topics:["Gas laws and ideal gas equation","Absolute scale of temperature","Deviation from ideality — van der Waals equation","Kinetic theory of gases","Average, root mean square and most probable velocities and relation with temperature","Law of partial pressures (Dalton's law)","Diffusion of gases (Graham's law)","Intermolecular interactions — types, distance dependence, effect on properties","Liquids — vapour pressure, surface tension, viscosity"]},
+    {id:"ch-atomic",chapter:"Atomic Structure",topics:["Bohr model and spectrum of hydrogen atom","Wave-particle duality","de Broglie hypothesis","Heisenberg uncertainty principle","Quantum mechanical picture of hydrogen atom — energies, quantum numbers","Wave function and probability density (plots only)","Shapes of s, p and d orbitals","Aufbau principle","Pauli's exclusion principle","Hund's rule"]},
+    {id:"ch-bonding",chapter:"Chemical Bonding and Molecular Structure",topics:["Orbital overlap and covalent bond","Hybridisation involving s, p and d orbitals","Molecular orbital energy diagrams for homonuclear diatomic species (up to Ne₂)","Hydrogen bond","Polarity in molecules and dipole moment","VSEPR model","Shapes of molecules — linear, angular, triangular, square planar, pyramidal, square pyramidal, trigonal bipyramidal, tetrahedral, octahedral"]},
+    {id:"ch-thermo",chapter:"Chemical Thermodynamics",topics:["Intensive and extensive properties","State functions","First law of thermodynamics","Internal energy, work (pressure-volume only) and heat","Enthalpy and heat capacity","Standard state and Hess's law","Enthalpy of reaction, fusion, vaporization and lattice enthalpy","Second law of thermodynamics","Entropy","Gibbs energy","Criteria of equilibrium and spontaneity"]},
+    {id:"ch-equil",chapter:"Chemical and Ionic Equilibrium",topics:["Law of mass action","Significance of ΔG and ΔG° in equilibrium","Equilibrium constant Kp and Kc","Reaction quotient","Le Chatelier's principle — effect of concentration, temperature and pressure","Solubility product and its applications","Common ion effect","pH and buffer solutions","Acids and bases — Brønsted and Lewis concepts","Hydrolysis of salts"]},
+    {id:"ch-electro",chapter:"Electrochemistry",topics:["Electrochemical cells and cell reactions","Standard electrode potentials","Electrochemical work and Nernst equation","Electrochemical series","EMF of galvanic cells","Faraday's laws of electrolysis","Electrolytic conductance — specific, equivalent and molar conductivity","Kohlrausch's law","Batteries — primary and secondary","Fuel cells","Corrosion"]},
+    {id:"ch-kinetics",chapter:"Chemical Kinetics",topics:["Rates of chemical reactions","Order and molecularity of reactions","Rate law and rate constant","Half-life","Differential and integrated rate expressions for zero order reactions","Differential and integrated rate expressions for first order reactions","Temperature dependence of rate constant — Arrhenius equation and activation energy","Catalysis — homogeneous and heterogeneous","Activity and selectivity of solid catalysts","Enzyme catalysis and its mechanism"]},
+    {id:"ch-solid",chapter:"Solid State",topics:["Classification of solids","Crystalline state","Seven crystal systems — cell parameters a, b, c, α, β, γ","Close packed structure — cubic (fcc, bcc) and hexagonal (hcp)","Packing in fcc, bcc and hcp lattices","Nearest neighbours","Ionic radii and radius ratio","Point defects"]},
+    {id:"ch-solutions",chapter:"Solutions",topics:["Henry's law","Raoult's law","Ideal solutions","Colligative properties — lowering of vapour pressure","Elevation of boiling point","Depression of freezing point","Osmotic pressure","Van't Hoff factor"]},
+    {id:"ch-surface",chapter:"Surface Chemistry",topics:["Adsorption — physisorption and chemisorption","Freundlich adsorption isotherm","Colloids — types, methods of preparation and general properties","Emulsions — elementary ideas","Surfactants and micelles (definitions and examples)"]},
+    {id:"ch-periodic",chapter:"Classification of Elements and Periodicity",topics:["Modern periodic law and the present form of periodic table","Electronic configuration of elements","Periodic trends — atomic radius","Ionic radius","Ionization enthalpy","Electron gain enthalpy","Valence and oxidation states","Electronegativity","Chemical reactivity"]},
+    {id:"ch-hydrogen",chapter:"Hydrogen",topics:["Position of hydrogen in periodic table","Occurrence and isotopes","Preparation, properties and uses of hydrogen","Hydrides — ionic, covalent and interstitial","Physical and chemical properties of water and heavy water","Hydrogen peroxide — preparation, reactions, use and structure","Hydrogen as a fuel"]},
+    {id:"ch-sblock",chapter:"s-Block Elements",topics:["Alkali metals — reactivity towards air, water, dihydrogen, halogens, acids","Reducing nature of alkali metals including solutions in liquid ammonia","Uses of alkali metals","General characteristics of oxides, hydroxides, halides, salts of oxoacids","Anomalous behaviour of lithium and beryllium","Alkaline earth metals — reactivity towards air, water, dihydrogen, halogens, acids","Diagonal relationship (Li–Mg and Be–Al)","Sodium compounds — Na₂CO₃, NaCl, NaOH, NaHCO₃ (preparation, properties, uses)","Calcium compounds — CaO, Ca(OH)₂, CaCO₃, CaSO₄ (preparation, properties, uses)"]},
+    {id:"ch-pblock",chapter:"p-Block Elements",topics:["Oxidation state and trends in chemical reactivity — Groups 13–17","Anomalous properties of B, C, N, O and F vs rest of their groups","Group 13 — reactivity towards acids, alkalis and halogens","Group 13 compounds — borax, orthoboric acid, diborane, BF₃, AlCl₃, alums","Uses of boron and aluminium","Group 14 — reactivity towards water and halogen; allotropes of carbon and uses","Group 14 compounds — CO, CO₂, SiO₂, silicones, silicates, zeolites","Group 15 — reactivity towards H₂, O₂ and halogen; allotropes of phosphorus","Group 15 compounds — N₂, NH₃, HNO₃, PH₃, PCl₃, PCl₅; oxides of N; oxoacids of P","Group 16 — reactivity towards H₂, O₂ and halogen; simple oxides; allotropes of S","Group 16 compounds — O₂, O₃, SO₂, H₂SO₄; oxoacids of sulphur","Group 17 — reactivity towards H₂, O₂ and metals","Group 17 compounds — Cl₂, HCl, interhalogen compounds; oxoacids of halogens; bleaching powder","Group 18 — chemical properties and uses; compounds of xenon with F and O"]},
+    {id:"ch-dblock",chapter:"d-Block Elements",topics:["Oxidation states and their stability","Standard electrode potentials of transition metals","Interstitial compounds and alloys","Catalytic properties","Applications of d-block elements","Oxoanions of chromium — preparation, structure and reactions","Oxoanions of manganese — preparation, structure and reactions"]},
+    {id:"ch-fblock",chapter:"f-Block Elements",topics:["Lanthanoid contraction","Actinoid contraction","Oxidation states of lanthanoids and actinoids","General characteristics of lanthanoids and actinoids"]},
+    {id:"ch-coord",chapter:"Coordination Compounds",topics:["Werner's theory","Nomenclature of coordination compounds","cis-trans isomerism","Ionization isomerism","Hybridization and geometries — linear, tetrahedral, square planar, octahedral","Bonding — Valence Bond Theory (VBT)","Bonding — Crystal Field Theory (CFT) for octahedral and tetrahedral fields","Magnetic properties (spin-only) of 3d-series coordination compounds","Colour of 3d-series coordination compounds","Ligands and spectrochemical series","Stability of coordination compounds","Importance and applications","Metal carbonyls"]},
+    {id:"ch-metals",chapter:"Isolation of Metals",topics:["Metal ores and their concentration","Thermodynamic principles of metallurgy — iron, copper, zinc","Electrochemical principles of metallurgy — aluminium","Cyanide process — silver and gold","Refining of metals"]},
+    {id:"ch-qual",chapter:"Principles of Qualitative Analysis",topics:["Group I cations — Ag⁺, Hg₂²⁺","Group II cations — Cu²⁺, Pb²⁺","Group III cations — Fe³⁺, Cr³⁺, Al³⁺","Group IV cations — Zn²⁺, Mn²⁺","Group V cations — Ca²⁺, Ba²⁺","Group VI cations — Mg²⁺","Anion detection — nitrate, halides (excl. fluoride)","Anion detection — carbonate, bicarbonate, sulphate, sulphide"]},
+    {id:"ch-env",chapter:"Environmental Chemistry",topics:["Atmospheric pollution","Water pollution","Soil pollution","Industrial waste","Strategies to control environmental pollution","Green chemistry"]},
+    {id:"ch-org-basic",chapter:"Basic Principles of Organic Chemistry",topics:["Hybridisation of carbon","σ and π bonds","Shapes of simple organic molecules","Aromaticity","Structural isomerism","Geometrical isomerism","Stereoisomers — enantiomers, diastereomers, meso compounds (up to 2 asymmetric centres)","R/S and E/Z configurations excluded","Empirical and molecular formula determination by combustion method","IUPAC nomenclature — hydrocarbons and mono/bi-functional derivatives","Hydrogen bonding effects","Inductive effect","Resonance (mesomeric) effect","Hyperconjugation","Acidity and basicity of organic compounds","Reactive intermediates — carbocations, carbanions, free radicals (homolytic/heterolytic cleavage)"]},
+    {id:"ch-alkanes",chapter:"Alkanes",topics:["Homologous series","Physical properties — melting points, boiling points, density","Effect of branching on physical properties","Conformations of ethane and butane (Newman projections only)","Preparation from alkyl halides","Preparation from aliphatic carboxylic acids","Reactions — combustion","Halogenation (including allylic and benzylic)","Oxidation"]},
+    {id:"ch-alkenes",chapter:"Alkenes and Alkynes",topics:["Physical properties — boiling points, density, dipole moments","Preparation by elimination reactions","Acid catalysed hydration (stereochemistry excluded)","Metal acetylides","Reactions of alkenes with KMnO₄ and ozone","Reduction of alkenes and alkynes","Electrophilic addition of alkenes with X₂, HX, HOX (X = halogen)","Effect of peroxide on addition reactions","Cyclic polymerization reaction of alkynes"]},
+    {id:"ch-benzene",chapter:"Benzene",topics:["Structure of benzene","Electrophilic substitution — halogenation","Nitration","Sulphonation","Friedel-Crafts alkylation","Friedel-Crafts acylation","Effect of directing groups in monosubstituted benzene"]},
+    {id:"ch-phenols",chapter:"Phenols",topics:["Physical properties of phenols","Preparation of phenols","Electrophilic substitution — halogenation, nitration, sulphonation","Reimer-Tiemann reaction","Kolbe reaction","Esterification of phenols","Etherification of phenols","Aspirin synthesis","Oxidation and reduction of phenol"]},
+    {id:"ch-alkylhal",chapter:"Alkyl Halides",topics:["Rearrangement reactions of alkyl carbocation","Grignard reactions","Nucleophilic substitution reactions","Stereochemical aspects of nucleophilic substitution"]},
+    {id:"ch-alcohols",chapter:"Alcohols",topics:["Physical properties of alcohols","Esterification","Dehydration — formation of alkenes and ethers","Reactions with sodium, phosphorus halides, ZnCl₂/conc. HCl, thionyl chloride","Conversion to aldehydes, ketones and carboxylic acids"]},
+    {id:"ch-ethers",chapter:"Ethers",topics:["Preparation by Williamson's synthesis","C–O bond cleavage reactions of ethers"]},
+    {id:"ch-aldket",chapter:"Aldehydes and Ketones",topics:["Preparation from acid chlorides and nitriles","Preparation of aldehydes from esters","Benzaldehyde from toluene and benzene","Reactions — oxidation and reduction","Oxime and hydrazone formation","Aldol condensation","Cannizzaro reaction","Haloform reaction","Nucleophilic addition — RMgX, NaHSO₃, HCN, alcohol, amine"]},
+    {id:"ch-acids",chapter:"Carboxylic Acids",topics:["Physical properties","Preparation from nitriles","Preparation from Grignard reagents","Preparation by hydrolysis of esters and amides","Benzoic acid from alkylbenzenes","Reactions — reduction, halogenation","Formation of esters, acid chlorides and amides"]},
+    {id:"ch-amines",chapter:"Amines",topics:["Preparation from nitro compounds, nitriles and amides","Hoffmann bromamide degradation","Gabriel phthalimide synthesis","Reaction with nitrous acid","Azo coupling reaction of diazonium salts of aromatic amines","Sandmeyer and related reactions of diazonium salts","Carbylamine reaction","Hinsberg test","Alkylation and acylation reactions of amines"]},
+    {id:"ch-haloarenes",chapter:"Haloarenes",topics:["Fittig reaction","Wurtz-Fittig reaction","Nucleophilic aromatic substitution in haloarenes and substituted haloarenes","(Benzyne mechanism and cine substitution excluded)"]},
+    {id:"ch-biomol",chapter:"Biomolecules",topics:["Carbohydrates — classification","Monosaccharides — glucose (oxidation, reduction, glycoside formation, anomers)","Disaccharides — sucrose, maltose, lactose (hydrolysis)","Proteins — amino acids and peptide linkage","Primary and secondary structure of peptides","Types of proteins — fibrous and globular","Nucleic acids — chemical composition and structure of DNA and RNA"]},
+    {id:"ch-polymers",chapter:"Polymers",topics:["Types of polymerization — addition and condensation","Homo and copolymers","Natural rubber","Cellulose","Nylon","Teflon","Bakelite","PVC","Biodegradable polymers","Applications of polymers"]},
+    {id:"ch-everyday",chapter:"Chemistry in Everyday Life",topics:["Drug-target interaction","Therapeutic action and examples of antacids (excluding structures)","Antihistamines","Tranquilizers","Analgesics","Antimicrobials","Antifertility drugs","Artificial sweeteners (names only)","Soaps, detergents and cleansing action"]},
+    {id:"ch-practorg",chapter:"Practical Organic Chemistry",topics:["Detection of elements — N, S, halogens","Detection of hydroxyl group — alcoholic","Detection of hydroxyl group — phenolic","Detection of carbonyl group — aldehyde","Detection of carbonyl group — ketone","Detection of carboxyl group","Detection of amino group","Detection of nitro group"]}
+  ],
+  Mathematics: [
+    {id:"ma-sets",chapter:"Sets, Relations and Functions",topics:["Sets and their representations","Empty, finite and infinite sets","Algebra of sets — union, intersection, complement, difference","Symmetric difference of sets and algebraic properties","De-Morgan's laws (for finite number of sets)","Practical problems based on sets","Cartesian product of finite sets","Ordered pairs","Relations — domain and codomain","Equivalence relation","Functions as mappings — domain, codomain, range","Invertible functions","Even and odd functions","Into, onto and one-to-one functions","Special functions — polynomial, trigonometric, exponential, logarithmic, power, absolute value, greatest integer","Sum, difference, product and composition of functions"]},
+    {id:"ma-algebra",chapter:"Algebra",topics:["Algebra of complex numbers — addition, multiplication, conjugation","Polar representation of complex numbers","Properties of modulus and principal argument","Triangle inequality","Cube roots of unity","Geometric interpretations of complex numbers","Fundamental theorem of algebra (statement only)","Quadratic equations with real coefficients","Relations between roots and coefficients","Formation of quadratic equations with given roots","Symmetric functions of roots","Arithmetic and geometric progressions","Arithmetic and geometric means","Sums of finite AP and GP","Infinite geometric series","Sum of first n natural numbers, squares and cubes","Logarithms and their properties","Permutations and Combinations","Binomial theorem for positive integral index","Properties of binomial coefficients"]},
+    {id:"ma-matrices",chapter:"Matrices",topics:["Matrices as rectangular array of real numbers","Equality of matrices","Addition of matrices","Multiplication by a scalar","Product of matrices","Transpose of a matrix","Elementary row and column transformations","Determinant of a square matrix (order up to 3)","Adjoint of a matrix","Inverse of a square matrix (order up to 3)","Properties of matrix operations","Diagonal, symmetric and skew-symmetric matrices and properties","Solutions of simultaneous linear equations in 2 or 3 variables"]},
+    {id:"ma-prob",chapter:"Probability and Statistics",topics:["Random experiment and sample space","Types of events — impossible, simple, compound","Addition and multiplication rules of probability","Conditional probability","Independence of events","Total probability","Bayes' theorem","Probability using permutations and combinations","Measure of central tendency — mean, median, mode","Mean deviation","Standard deviation and variance","Grouped and ungrouped data","Frequency distribution with same mean but different variance","Random variable","Mean and variance of a random variable"]},
+    {id:"ma-trig",chapter:"Trigonometry",topics:["Trigonometric functions — periodicity and graphs","Addition and subtraction formulae","Multiple and sub-multiple angle formulae","General solution of trigonometric equations","Inverse trigonometric functions — principal value only","Elementary properties of inverse trig functions"]},
+    {id:"ma-2d",chapter:"Analytical Geometry: 2D",topics:["Cartesian coordinates","Distance between two points","Section formulae","Shift of origin","Equation of a straight line in various forms","Angle between two lines","Distance of a point from a line","Lines through the point of intersection of two given lines","Equation of bisector of angle between two lines","Concurrency of lines","Centroid, orthocentre, incentre and circumcentre of a triangle","Equation of a circle in various forms","Equations of tangent, normal and chord","Parametric equations of a circle","Intersection of a circle with a straight line or another circle","Circle through intersection of two circles and a circle and a straight line","Parabola — standard form, focus, directrix, eccentricity","Parametric equations of parabola","Tangent and normal to parabola","Ellipse — standard form, foci, directrices, eccentricity","Parametric equations of ellipse","Tangent and normal to ellipse","Hyperbola — standard form, foci, directrices, eccentricity","Parametric equations of hyperbola","Tangent and normal to hyperbola","Locus problems"]},
+    {id:"ma-3d",chapter:"Analytical Geometry: 3D",topics:["Distance between two points in 3D","Direction cosines and direction ratios","Equation of a straight line in space","Skew lines and shortest distance between two lines","Equation of a plane","Distance of a point from a plane","Angle between two lines","Angle between two planes","Angle between a line and a plane","Coplanar lines"]},
+    {id:"ma-vectors",chapter:"Vectors",topics:["Addition of vectors","Scalar multiplication","Dot product (scalar product)","Cross product (vector product)","Scalar triple product","Vector triple product","Geometrical interpretations of vector products"]},
+    {id:"ma-diff",chapter:"Differential Calculus",topics:["Limit of a function at a real number","Continuity of a function","Limit and continuity of sum, difference, product and quotient of functions","L'Hôpital's rule","Continuity of composite functions","Intermediate value property of continuous functions","Derivative of a function","Derivative of sum, difference, product, quotient of functions","Chain rule","Derivatives of polynomial, rational, trigonometric, inverse trig, exponential and logarithmic functions","Derivatives up to order two of implicit functions","Tangents and normals","Increasing and decreasing functions","Second order derivatives","Maximum and minimum values of a function","Rolle's theorem and Lagrange's Mean Value Theorem","Geometric interpretation of Rolle's and LMVT"]},
+    {id:"ma-integral",chapter:"Integral Calculus",topics:["Integration as inverse of differentiation","Indefinite integrals of standard functions","Definite integrals as limit of sums","Properties of definite integrals","Fundamental theorem of integral calculus","Integration by parts","Integration by substitution","Integration by partial fractions","Application — areas bounded by simple curves","Formation of ordinary differential equations","Solution of homogeneous ODEs of first order and first degree","Separation of variables method","Linear first order differential equations"]}
+  ]
+};
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
 async function init(){
   loadSbConfig();
-  load(); // load from localStorage first (fast)
+  load();
+  updateModeUI();
   switchTab('Physics');
+  updateCountdown();
   if(sbConfig){
     setSyncStatus('saving','Connecting…');
-    const pulled = await sbPull();
-    if(pulled){
-      setSyncStatus('connected','Synced');
-      renderChapters();
-      updateStats();
-    } else {
-      setSyncStatus('connected','Synced');
-    }
+    const pulled=await sbPull();
+    if(pulled){setSyncStatus('connected','Synced');renderChapters();updateStats();}
+    else setSyncStatus('connected','Synced');
   }
 }
 init();
