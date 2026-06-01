@@ -115,10 +115,119 @@
     await _origConnect();
   };
 
-  /* ── 5. Run the DOM patch ── */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', patchModal);
-  } else {
+  /* ── 5. Namespace topic keys with mode prefix ────────────────────────────
+   *
+   * Original key format:  "Physics::ch-motion::Free body diagrams::theory"
+   * New key format:       "main::Physics::ch-motion::Free body diagrams::theory"
+   *                       "adv::Physics::ch-motion::Free body diagrams::theory"
+   *
+   * This ensures that even if checked objects from both modes ever share the
+   * same storage space they cannot collide.  A one-time migration converts any
+   * existing keys (no mode prefix) to the new format automatically.
+   * ────────────────────────────────────────────────────────────────────────── */
+
+  // Override topicKey to include the active mode as a namespace prefix.
+  window.topicKey = function (subject, chapterId, topic, type) {
+    return `${activeMode}::${subject}::${chapterId}::${topic}::${type}`;
+  };
+
+  /**
+   * Migrate a checked object whose keys lack a mode prefix.
+   * Reads every key; if it does NOT start with "main::" or "adv::" it is
+   * re-keyed under the supplied mode prefix.  Returns true if anything changed.
+   */
+  function migrateCheckedKeys(obj, mode) {
+    const prefix = mode + '::';
+    const legacyKeys = Object.keys(obj).filter(
+      k => !k.startsWith('main::') && !k.startsWith('adv::')
+    );
+    if (!legacyKeys.length) return false;
+    legacyKeys.forEach(k => {
+      obj[prefix + k] = obj[k];
+      delete obj[k];
+    });
+    return true;
+  }
+
+  /**
+   * Run migration once for both modes against their localStorage copies.
+   * Does nothing if keys are already in the new format.
+   */
+  function runCheckedMigration() {
+    ['main', 'adv'].forEach(mode => {
+      const lsKey = mode === 'main' ? 'jee_main_checked' : 'jee_adv_checked';
+      try {
+        const raw = localStorage.getItem(lsKey);
+        if (!raw) return;
+        const obj = JSON.parse(raw);
+        if (migrateCheckedKeys(obj, mode)) {
+          localStorage.setItem(lsKey, JSON.stringify(obj));
+          console.log(`[patch] Migrated ${mode} checked keys to namespaced format.`);
+        }
+      } catch (e) { /* silently skip on parse errors */ }
+    });
+  }
+
+  /* ── 6. Auto-sync on mode switch ─────────────────────────────────────────
+   *
+   * Problem: switchMode() only calls sbPull() for the *new* mode.  Any
+   * debounce-pending changes to the *current* mode are silently abandoned.
+   *
+   * Fix: wrap switchMode() so we await sbPush() for the current mode first,
+   * then let the original handler switch + pull the new mode.
+   * ────────────────────────────────────────────────────────────────────────── */
+
+  const _origSwitchMode = window.switchMode;
+  window.switchMode = async function (mode) {
+    if (mode === activeMode) return;
+
+    // 1. Flush any pending changes for the *current* mode to the cloud.
+    if (typeof sbConfig !== 'undefined' && sbConfig) {
+      // Cancel the pending debounce so sbPush() is not called twice.
+      if (typeof saveDebounceTimer !== 'undefined') {
+        clearTimeout(saveDebounceTimer);
+      }
+      try {
+        await sbPush();
+      } catch (e) {
+        console.warn('[patch] Pre-switch push failed:', e);
+      }
+    }
+
+    // 2. Delegate to original: sets activeMode, loads local data, pulls cloud.
+    await _origSwitchMode(mode);
+  };
+
+  /* ── 7. Run the DOM patch + one-time migration ── */
+  function init() {
     patchModal();
+    runCheckedMigration();
+    // Re-run migration after sbPull replaces checked — hook into sbPull.
+    const _origSbPull = window.sbPull;
+    if (_origSbPull) {
+      window.sbPull = async function () {
+        const result = await _origSbPull();
+        // After a pull, the in-memory `checked` may have been replaced with
+        // data from Supabase that still uses the old key format — migrate it
+        // and persist so subsequent pushes send namespaced keys.
+        if (result && typeof checked !== 'undefined') {
+          if (migrateCheckedKeys(checked, activeMode)) {
+            const lsKey = activeMode === 'main' ? 'jee_main_checked' : 'jee_adv_checked';
+            localStorage.setItem(lsKey, JSON.stringify(checked));
+            // Push the migrated version back so Supabase is also updated.
+            if (typeof sbConfig !== 'undefined' && sbConfig) {
+              try { await sbPush(); } catch (e) { /* ignore */ }
+            }
+          }
+        }
+        return result;
+      };
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
